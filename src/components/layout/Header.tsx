@@ -79,75 +79,6 @@ export default function Header() {
   };
 
   return (
-    // <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-lg z-50 border-b border-amber-200">
-    //     <div className="container mx-auto px-4 py-3">
-    //       <div className="flex items-center justify-between">
-    //         <motion.div 
-    //           className="flex items-center space-x-3"
-    //           initial={{ opacity: 0, x: -20 }}
-    //           animate={{ opacity: 1, x: 0 }}
-    //           transition={{ duration: 0.5 }}
-    //         >
-    //           <img src={logo} alt="Paraty Sail Festival" className="h-12 w-auto" />
-    //           <div className="hidden md:block">
-    //             <h1 className="text-xl font-bold text-teal-800">Paraty Sail Festival</h1>
-    //             <p className="text-sm text-amber-600">2025</p>
-    //           </div>
-    //         </motion.div>
-
-    //         {/* Desktop Menu */}
-    //         <nav className="hidden lg:flex space-x-6">
-    //           {menuItems.map((item) => (
-    //             <button
-    //               key={item.id}
-    //               onClick={() => scrollToSection(item.id)}
-    //               className={`px-3 py-2 rounded-lg transition-all duration-300 text-sm font-medium ${
-    //                 activeSection === item.id
-    //                   ? 'bg-amber-100 text-amber-800 shadow-md'
-    //                   : 'text-slate-700 hover:bg-amber-50 hover:text-amber-700'
-    //               }`}
-    //             >
-    //               {item.label}
-    //             </button>
-    //           ))}
-    //         </nav>
-
-    //         {/* Mobile Menu Button */}
-    //         <button
-    //           onClick={() => setIsMenuOpen(!isMenuOpen)}
-    //           className="lg:hidden p-2 rounded-lg bg-amber-100 text-amber-800"
-    //         >
-    //           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-    //         </button>
-    //       </div>
-    //     </div>
-
-    //     {/* Mobile Menu */}
-    //     <AnimatePresence>
-    //       {isMenuOpen && (
-    //         <motion.div
-    //           initial={{ opacity: 0, height: 0 }}
-    //           animate={{ opacity: 1, height: 'auto' }}
-    //           exit={{ opacity: 0, height: 0 }}
-    //           className="lg:hidden bg-white border-t border-amber-200 mobile-menu"
-    //         >
-    //           <div className="container mx-auto px-4 py-4">
-    //             <div className="grid grid-cols-2 gap-2">
-    //               {menuItems.map((item) => (
-    //                 <button
-    //                   key={item.id}
-    //                   onClick={() => scrollToSection(item.id)}
-    //                   className="p-3 text-left rounded-lg text-sm font-medium text-slate-700 hover:bg-amber-50 hover:text-amber-700 transition-colors"
-    //                 >
-    //                   {item.label}
-    //                 </button>
-    //               ))}
-    //             </div>
-    //           </div>
-    //         </motion.div>
-    //       )}
-    //     </AnimatePresence>
-    //   </header>
     <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-lg z-50 border-b border-amber-200">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
@@ -157,7 +88,7 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Image src="/logo.jpeg" alt="Paraty Sail Festival" width={48} height={48} className="h-12 w-auto" />
+            <Image src="/images/logo.jpeg" alt="Paraty Sail Festival" width={48} height={48} className="h-12 w-auto" />
             <div className="hidden md:block">
               <h1 className="text-xl font-bold text-teal-800">Paraty Sail Festival</h1>
               <p className="text-sm text-amber-600">2025</p>
