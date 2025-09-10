@@ -19,7 +19,11 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+    rules: {
+      "@next/next/no-sync-scripts": "off"
+    }
   },
+  
 ];
 
 export default eslintConfig;
