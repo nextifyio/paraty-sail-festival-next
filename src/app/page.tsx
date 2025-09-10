@@ -16,6 +16,7 @@ import ExpositoresSection from '@/components/sections/ExpositoresSection';
 import ComoChegarSection from '@/components/sections/ComoChegarSection';
 import SejaPatrocinadorSection from '@/components/sections/SejaPatrocinadorSection';
 import FAQSection from '@/components/sections/FAQSection';
+import AtracoesSection from '@/components/sections/AtracoesSection';
 
 export default function Home() {
   const scrollToSection = useCallback((sectionId: string) => {
@@ -34,6 +35,7 @@ export default function Home() {
         {/* <SobreSection /> */}
         <ProgramacaoSection />
         <PalestrantesSection />
+        <AtracoesSection />
         <InscricoesSection />
         <ExpositoresSection />
         <HospedagensSection />

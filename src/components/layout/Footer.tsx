@@ -39,15 +39,17 @@ export default function Footer({ onScrollToSection }: FooterProps) {
               <li><button onClick={() => onScrollToSection('sobre')} className="hover:text-white transition-colors">Sobre</button></li>
               <li><button onClick={() => onScrollToSection('programacao')} className="hover:text-white transition-colors">Programação</button></li>
               <li><button onClick={() => onScrollToSection('palestrantes')} className="hover:text-white transition-colors">Palestrantes</button></li>
-              <li><button onClick={() => onScrollToSection('inscricoes')} className="hover:text-white transition-colors">Inscrições</button></li>
+              <li><button onClick={() => onScrollToSection('atracoes')} className="hover:text-white transition-colors">Atrações</button></li>
+              <li><button onClick={() => onScrollToSection('inscricoes')} className="hover:text-white transition-colors">Inscrição Regata</button></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-lg font-semibold mb-4">Serviços</h4>
             <ul className="space-y-2 text-teal-200">
-              <li><button onClick={() => onScrollToSection('hospedagem')} className="hover:text-white transition-colors">Parceiros</button></li>
-              {/* <li><button onClick={() => onScrollToSection('restaurantes')} className="hover:text-white transition-colors">Restaurantes</button></li> */}
+              <li><button onClick={() => onScrollToSection('expositores')} className="hover:text-white transition-colors">Expositores</button></li>
+              <li><button onClick={() => onScrollToSection('restaurantes')} className="hover:text-white transition-colors">Área Gastronômica</button></li>
+              <li><button onClick={() => onScrollToSection('hospedagem')} className="hover:text-white transition-colors">Hospedagem</button></li>
               <li><button onClick={() => onScrollToSection('como-chegar')} className="hover:text-white transition-colors">Como Chegar</button></li>
               <li><button onClick={() => onScrollToSection('faq')} className="hover:text-white transition-colors">FAQ</button></li>
             </ul>
@@ -58,11 +60,11 @@ export default function Footer({ onScrollToSection }: FooterProps) {
             <div className="space-y-3 text-teal-200">
               <div className="flex items-center space-x-2">
                 <Mail size={16} />
-                <span>contato@paratysailfestival.com.br</span>
+                <span>contato@paratysailfestival.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone size={16} />
-                <span>(24) 99988-7766</span>
+                <span>(24) 98110-4172</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin size={16} />

@@ -8,7 +8,7 @@ export default function InscricoesSection() {
   return (
     <SectionWrapper 
       id="inscricoes"
-      title="Inscrições para a Regata"
+      title="Inscrições para a 1ª Regata Amyr Klink"
       subtitle="Participe da regata mais esperada do ano"
       className="bg-gradient-to-br from-teal-600 to-amber-600 text-white"
       titleClassName="text-white"
@@ -52,7 +52,7 @@ export default function InscricoesSection() {
             <DollarSign className="mx-auto mb-4 text-amber-300" size={32} />
             <h4 className="text-lg font-semibold mb-2">Valor Único</h4>
             <p className="text-teal-100 text-sm">Por tripulante</p>
-            <p className="text-teal-100 text-sm">R$ 249,00 / kit com camiseta</p>
+            <p className="text-teal-100 text-sm">R$ 200,00 / kit com camiseta, boné, chaveiro e bolsa</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
             <Anchor className="mx-auto mb-4 text-amber-300" size={32} />

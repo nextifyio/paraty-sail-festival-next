@@ -8,13 +8,13 @@ import {
 } from '@/types';
 
 export const palestrantes: Palestrante[] = [
-  {
-    nome: "Amyr Klink",
-    especialidade: "Navegador e Explorador",
-    bio: "Homenagem especial ao maior navegador brasileiro",
-    dia: "Sábado",
-    horario: "19:00h"
-  },
+  // {
+  //   nome: "Amyr Klink",
+  //   especialidade: "Navegador e Explorador",
+  //   bio: "Homenagem especial ao maior navegador brasileiro",
+  //   dia: "Sábado",
+  //   horario: "19:00h"
+  // },
   {
     nome: "Charles Flesch",
     especialidade: "Especialista em Vela",
@@ -81,6 +81,59 @@ export const palestrantes: Palestrante[] = [
   {
     nome: "Priscila/Cláudio e Noah Beijupira",
     especialidade: "Vida a Bordo",
+    bio: "",
+    dia: "??",
+    horario: "??"
+  }
+];
+
+export const atracoes: Palestrante[] = [
+
+  {
+    nome: "Mar Virado",
+    especialidade: "Surf Music",
+    bio: "@surflaskera",
+    dia: "Sábado",
+    horario: "11:00h"
+  },
+  {
+    nome: "Mamba",
+    especialidade: "Rock Clássico",
+    bio: "@aaa",
+    dia: "Sábado",
+    horario: "13:00h"
+  },
+  {
+    nome: "Mundiá Carimbó",
+    especialidade: "Carimbó",
+    bio: "",
+    dia: "Quinta",
+    horario: "13:00h"
+  },
+  {
+    nome: "Maracatu Tira Mofo",
+    especialidade: "Maracatu",
+    bio: "",
+    dia: "Sábado",
+    horario: "16:30h"
+  },
+  {
+    nome: "Capitão Rock",
+    especialidade: "Rock",
+    bio: "",
+    dia: "Domingo",
+    horario: "11:00h"
+  },
+  {
+    nome: "Leonidas",
+    especialidade: "Ciranda os Caiçaras",
+    bio: "",
+    dia: "??",
+    horario: "??"
+  },
+  {
+    nome: "DJ Tugão",
+    especialidade: "",
     bio: "",
     dia: "??",
     horario: "??"
@@ -197,7 +250,7 @@ export const faqItems: FAQ[] = [
   },
   {
     pergunta: "Qual é o endereço do evento?",
-    resposta: "O evento acontece no Centro Histórico de Paraty, com largada da regata na Marina da Praia do Pontal."
+    resposta: "O evento acontecerá  no espaço do estacionamento ao lado do Hospital de Paraty Hugo Miranda, av. Nossa Senhora dos Remédios, Praia do Pontal."
   },
   {
     pergunta: "Há estacionamento disponível?",
@@ -209,6 +262,6 @@ export const faqItems: FAQ[] = [
   },
   {
     pergunta: "Posso levar crianças?",
-    resposta: "Sim! Temos atividades especiais para crianças, incluindo a Regata Kids no Jabaquara."
+    resposta: "Sim! Temos atividades especiais para crianças, incluindo aulas de vela com o projeto Na Vela Paraty, com Bianca na praia do Jabaquara e a Regata Kids no Pontal."
   }
 ];

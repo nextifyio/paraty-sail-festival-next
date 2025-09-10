@@ -74,8 +74,7 @@ export default function ComoChegarSection() {
                 <MapPin className="text-teal-600" size={24} />
               </div>
               <h4 className="font-semibold text-teal-800 mb-2">Centro Histórico</h4>
-              <p className="text-gray-600 text-sm">Estacionamentos públicos próximos ao evento.</p>
-              <p className="text-gray-600 text-sm">Estacionamento reservado ao lado do trapiche.</p>
+              <p className="text-gray-600 text-sm">Estacionamento reservado ao lado do trapiche, ou públicos próximos ao evento.</p>
             </div>
             <div className="text-center p-4">
               <div className="bg-amber-100 p-3 rounded-lg w-fit mx-auto mb-3">
@@ -89,7 +88,7 @@ export default function ComoChegarSection() {
                 <DollarSign className="text-teal-600" size={24} />
               </div>
               <h4 className="font-semibold text-teal-800 mb-2">Valores</h4>
-              <p className="text-gray-600 text-sm">R$ 10-20 por dia nos estacionamentos</p>
+              <p className="text-gray-600 text-sm">R$ 30-50 por dia nos estacionamentos</p>
             </div>
           </div>
         </motion.div>

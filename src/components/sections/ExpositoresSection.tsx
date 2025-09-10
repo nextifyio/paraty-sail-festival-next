@@ -48,7 +48,8 @@ export default function ExpositoresSection() {
           </div>
 
           <a
-            href="mailto:expositores@paratysailfestival.com.br"
+            href="mailto:contato@paratysailfestival.com"
+            target='_blank'
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-amber-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-teal-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             <Mail size={20} />

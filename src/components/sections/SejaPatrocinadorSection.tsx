@@ -92,18 +92,18 @@ export default function SejaPatrocinadorSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:patrocinio@paratysailfestival.com.br"
+              href="mailto:patrocinio@paratysailfestival.com"
               className="inline-flex items-center space-x-2 bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <Mail size={20} />
-              <span>patrocinio@paratysailfestival.com.br</span>
+              <span>patrocinio@paratysailfestival.com</span>
             </a>
             <a
-              href="tel:+5524999887766"
+              href="tel:+5524981104172"
               className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/30 transition-all duration-300 border border-white/30"
             >
               <Phone size={20} />
-              <span>(24) 99988-7766</span>
+              <span>(24) 98110-4172</span>
             </a>
           </div>
         </motion.div>

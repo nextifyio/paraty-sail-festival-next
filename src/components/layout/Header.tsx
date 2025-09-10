@@ -14,10 +14,10 @@ const menuItems: MenuItem[] = [
   { id: 'home', label: 'Home' },
   { id: 'sobre', label: 'Sobre' },
   { id: 'programacao', label: 'Programação' },
-  { id: 'palestrantes', label: 'Palestrantes' },
+  // { id: 'palestrantes', label: 'Palestrantes' },
   { id: 'inscricoes', label: '1a Regata Amyr Klink' },
-  { id: 'expositores', label: 'Expositores' },
-  { id: 'hospedagem', label: 'Parceiros' },
+  //{ id: 'expositores', label: 'Expositores' },
+  { id: 'expositores', label: 'Parceiros' },
   { id: 'patrocinadores', label: 'Patrocinadores' },
   { id: 'patrocinio', label: 'Seja Patrocinador' },
   // { id: 'restaurantes', label: 'Restaurantes' },
@@ -45,7 +45,7 @@ export default function Header() {
       });
     }, observerOptions);
 
-    const sections = ['home', 'sobre', 'programacao', 'palestrantes', 'inscricoes', 'patrocinadores', 'expositores', 'hospedagem', 'como-chegar', 'restaurantes', 'patrocinio', 'faq'];
+    const sections = ['home', 'sobre', 'programacao', 'palestrantes', 'inscricoes', 'patrocinadores', 'parceiros', 'como-chegar', 'restaurantes', 'patrocinio', 'faq'];
     
     sections.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
