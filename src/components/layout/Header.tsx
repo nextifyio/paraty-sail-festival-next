@@ -109,7 +109,21 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Image src="/images/logo-header-transp.png" alt="Paraty Sail Festival" width={48} height={48} className="h-12 w-auto" />
+            <Image 
+              src="/images/logo-header-transp.png" 
+              alt="Paraty Sail Festival" 
+              width={96} 
+              height={96} 
+              className="h-12 w-auto object-contain logo-header" 
+              quality={100}
+              priority
+              unoptimized={true}
+              sizes="(max-width: 768px) 48px, 96px"
+              style={{
+                objectFit: 'contain',
+                backgroundColor: 'transparent'
+              }}
+            />
             <div className="hidden md:block">
               {/* <h1 className="text-xl font-bold text-teal-800">Paraty Sail Festival</h1> */}
               {/* <p className="text-sm text-amber-600">2025</p> */}
