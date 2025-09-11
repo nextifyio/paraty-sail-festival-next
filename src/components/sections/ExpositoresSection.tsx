@@ -6,7 +6,7 @@ import SectionWrapper from '@/components/layout/SectionWrapper';
 
 export default function ExpositoresSection() {
   return (
-    <SectionWrapper id="expositores" title="Área dos Expositores" subtitle="Espaço dedicado para empresas do setor náutico" className="bg-gradient-to-br from-teal-50 to-amber-50">
+    <SectionWrapper id="parceiros" title="Área dos Expositores" subtitle="Espaço dedicado para empresas do setor náutico" className="bg-gradient-to-br from-teal-50 to-amber-50">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

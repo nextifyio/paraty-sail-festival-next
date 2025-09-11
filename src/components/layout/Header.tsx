@@ -14,13 +14,10 @@ const menuItems: MenuItem[] = [
   { id: 'home', label: 'Home' },
   { id: 'sobre', label: 'Sobre' },
   { id: 'programacao', label: 'Programação' },
-  // { id: 'palestrantes', label: 'Palestrantes' },
-  { id: 'inscricoes', label: '1a Regata Amyr Klink' },
-  //{ id: 'expositores', label: 'Expositores' },
-  { id: 'expositores', label: 'Parceiros' },
+  { id: 'inscricoes', label: '1ª Regata Amyr Klink' },
+  { id: 'parceiros', label: 'Parceiros' },
   { id: 'patrocinadores', label: 'Patrocinadores' },
   { id: 'patrocinio', label: 'Seja Patrocinador' },
-  // { id: 'restaurantes', label: 'Restaurantes' },
   { id: 'como-chegar', label: 'Como Chegar' },
   { id: 'faq', label: 'FAQ' }
 ];
@@ -33,19 +30,35 @@ export default function Header() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-128px 0px -50% 0px',
-      threshold: 0
+      rootMargin: '-50px 0px -50% 0px',
+      threshold: [0, 0.1, 0.25]
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          const sectionId = entry.target.id;
+          console.log('Seção detectada:', sectionId); // Debug
+          setActiveSection(sectionId);
         }
       });
     }, observerOptions);
 
-    const sections = ['home', 'sobre', 'programacao', 'palestrantes', 'inscricoes', 'patrocinadores', 'parceiros', 'como-chegar', 'restaurantes', 'patrocinio', 'faq'];
+    const sections = [
+      'home', 
+      'sobre', 
+      'programacao', 
+      'palestrantes', 
+      'atracoes',
+      'inscricoes', 
+      'parceiros', 
+      'hospedagem',
+      'restaurantes',
+      'patrocinadores', 
+      'patrocinio',
+      'como-chegar', 
+      'faq'
+    ];
     
     sections.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
@@ -71,9 +84,17 @@ export default function Header() {
   }, [isMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
+    // Destacar imediatamente o item clicado
+    setActiveSection(sectionId);
+    
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      
+      // Garantir que o destaque permaneça após o scroll
+      setTimeout(() => {
+        setActiveSection(sectionId);
+      }, 500);
     }
     setIsMenuOpen(false);
   };

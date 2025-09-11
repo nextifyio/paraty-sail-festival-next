@@ -24,11 +24,25 @@ export default function InscricoesSection() {
           className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center"
         >
           <h3 className="text-2xl font-bold mb-6">Formulário de Inscrição</h3>
+          <div className="bg-amber-400/20 border border-amber-300 rounded-lg p-4 mb-6">
+            <p className="text-lg mb-4 text-white font-semibold">
+              📋 IMPORTANTE: Leia antes de se inscrever
+            </p>
+            <a 
+              href="https://drive.google.com/file/d/10pBeDj2YbcfNFSDbd6c4FUlrtpgX-dHT/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 bg-amber-400 text-gray-900 px-6 py-3 rounded-lg font-bold hover:bg-amber-300 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <span>📄 Aviso de Regata do Paraty Sail Festival 2025</span>
+              <ExternalLink size={18} />
+            </a>
+          </div>
           <p className="text-lg mb-8 text-teal-100">
             Preencha o formulário com os dados da sua embarcação, categoria e informações do responsável.
           </p>
           <a
-            href="https://forms.google.com/paraty-sail-festival-2025"
+            href="https://forms.gle/LsaMDeSmVHWDk29q7"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-2 bg-white text-teal-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"

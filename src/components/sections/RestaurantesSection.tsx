@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Star, UtensilsCrossed } from 'lucide-react';
+import { MapPin, Phone, Star, UtensilsCrossed, ExternalLink } from 'lucide-react';
 import { restaurantes } from '@/constants/data';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 import Image from 'next/image';
@@ -32,26 +32,35 @@ export default function RestaurantesSection() {
                 <span className="text-sm font-medium text-amber-600">{restaurante.especialidade}</span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin className="text-gray-400" size={16} />
-                <span className="text-sm text-gray-600">{restaurante.endereco}</span>
-              </div>
-              <div className="flex items-center space-x-2">
                 <Phone className="text-gray-400" size={16} />
                 <span className="text-sm text-gray-600">{restaurante.telefone}</span>
               </div>
             </div>
 
-            <a
-              href={`tel:${restaurante.telefone.replace(/[^\d]/g, '')}`}
-              className="block w-full bg-gradient-to-r from-teal-500 to-amber-500 text-white text-center py-2 rounded-lg font-semibold hover:from-teal-600 hover:to-amber-600 transition-all duration-300"
-            >
-              Ligar
-            </a>
+            {restaurante.cardapio ? (
+              <a
+                href={restaurante.cardapio}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-teal-500 to-amber-500 text-white text-center py-2 rounded-lg font-semibold hover:from-teal-600 hover:to-amber-600 transition-all duration-300"
+              >
+                <span>Acessar Cardápio</span>
+                <ExternalLink size={16} />
+              </a>
+            ) : (
+              <a
+                href={`tel:${restaurante.telefone.replace(/[^\d]/g, '')}`}
+                className="inline-flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-teal-500 to-amber-500 text-white text-center py-2 rounded-lg font-semibold hover:from-teal-600 hover:to-amber-600 transition-all duration-300"
+              >
+                <Phone size={16} />
+                <span>Ligar</span>
+              </a>
+            )}
           </motion.div>
         ))}
       </div>
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
@@ -70,7 +79,7 @@ export default function RestaurantesSection() {
         <p className="text-gray-600 max-w-2xl mx-auto">
           Descubra os sabores autênticos da cultura caiçara com pratos tradicionais preparados com ingredientes frescos do mar e da terra. Uma experiência gastronômica única que conecta você com a história e tradição de Paraty.
         </p>
-      </motion.div>
+      </motion.div> */}
     </SectionWrapper>
   );
 }

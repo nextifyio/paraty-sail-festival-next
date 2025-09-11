@@ -24,10 +24,10 @@ export default function Footer({ onScrollToSection }: FooterProps) {
               O festival de vela mais sofisticado do Brasil, celebrando a cultura náutica e caiçara em Paraty.
             </p>
             <div className="flex space-x-4">
-              <a href="https://instagram.com/paratysailfestival" className="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition-colors">
+              <a href="https://instagram.com/paratysailfestival" target='_blank' className="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="https://facebook.com/paratysailfestival" className="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition-colors">
+              <a href="https://facebook.com/paratysailfestival" target='_blank' className="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition-colors">
                 <Facebook size={20} />
               </a>
             </div>

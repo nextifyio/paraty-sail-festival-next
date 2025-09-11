@@ -280,19 +280,22 @@ export const restaurantes: Restaurante[] = [
     nome: "Restaurante Banana da Terra",
     especialidade: "Culinária Regional",
     endereco: "Rua Dr. Samuel Costa, 198",
-    telefone: "(24) 3371-1725"
+    telefone: "(24) 3371-1725",
+    cardapio: "https://www.bananadaterra.com.br/cardapio"
   },
   {
     nome: "Quintal das Letras",
     especialidade: "Contemporânea",
     endereco: "Travessa das Flores, 1",
-    telefone: "(24) 3371-1056"
+    telefone: "(24) 3371-1056",
+    cardapio: "https://www.quintaldasletras.com.br/menu"
   },
   {
     nome: "Margarida Café",
     especialidade: "Café e Lanches",
     endereco: "Praça do Chafariz, 15",
-    telefone: "(24) 3371-2441"
+    telefone: "(24) 3371-2441",
+    cardapio: "https://www.margaridacafe.com.br/cardapio"
   }
 ];
 

@@ -41,6 +41,7 @@ export interface Restaurante {
   especialidade: string;
   endereco: string;
   telefone: string;
+  cardapio?: string;
 }
 
 export interface FAQ {
