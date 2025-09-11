@@ -11,11 +11,11 @@ export default async function EditRestaurante({ params }: Props) {
   const { id } = await params
   const supabase = await createClient()
   
-  const { data: restaurante, error } = await supabase
+    const { data: restaurante, error } = await supabase
     .from('restaurantes')
     .select('*')
     .eq('id', id)
-    .single() as { data: Restaurante | null, error: any }
+    .single() as { data: Restaurante | null, error: Error | null }
 
   if (error || !restaurante) {
     notFound()

@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase-server'
 import { Pessoa } from '@/types'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Edit, Plus, User, Music, Mic, Trophy } from 'lucide-react'
 import { deletePessoa } from '../actions'
 import { DeleteForm } from '@/components/admin/DeleteForm'
@@ -51,7 +52,9 @@ export default async function PessoasPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 flex-1">
                     {pessoa.imagem ? (
-                      <img
+                      <Image
+                        width={64}
+                        height={64}
                         className="h-16 w-16 rounded-xl object-cover border-2 border-gray-200"
                         src={pessoa.imagem}
                         alt={pessoa.nome}

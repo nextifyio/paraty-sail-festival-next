@@ -9,7 +9,6 @@ import { ArrowLeft } from 'lucide-react'
 export default function NewFAQ() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const [nextOrder, setNextOrder] = useState(1)
   const [formData, setFormData] = useState({
     pergunta: '',
     resposta: '',
@@ -28,7 +27,6 @@ export default function NewFAQ() {
 
       if (!error && data && data.length > 0) {
         const newOrder = data[0].ordem + 1
-        setNextOrder(newOrder)
         setFormData(prev => ({ ...prev, ordem: newOrder }))
       }
     }
@@ -41,7 +39,7 @@ export default function NewFAQ() {
     setLoading(true)
 
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('faqs')
         .insert([formData])
         .select()

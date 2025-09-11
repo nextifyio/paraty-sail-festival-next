@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import { Upload, X, Image as ImageIcon } from 'lucide-react'
 
@@ -129,9 +130,11 @@ export default function ImageUpload({
     <div className={`space-y-2 ${className}`}>
       {currentImageUrl ? (
         <div className="relative inline-block">
-          <img
+          <Image
             src={currentImageUrl}
             alt="Uploaded image"
+            width={128}
+            height={128}
             className="w-32 h-32 object-cover rounded-lg border border-gray-300"
           />
           <button

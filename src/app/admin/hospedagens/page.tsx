@@ -17,10 +17,11 @@ function DeleteButton({ id }: { id: string }) {
 export default async function HospedagensPage() {
   const supabase = await createClient()
   
-  const { data: hospedagens, error } = await supabase
+    const { data: hospedagens, error } = await supabase
     .from('hospedagens')
     .select('*')
-    .order('nome') as { data: Hospedagem[] | null, error: any }
+    .eq('ativo', true)
+    .order('nome') as { data: Hospedagem[] | null, error: Error | null }
 
   if (error) {
     console.error('Error fetching hospedagens:', error)

@@ -24,9 +24,12 @@ export default async function EditPatrocinador({ params }: Props) {
   
   const { data: patrocinador, error } = await supabase
     .from('patrocinadores')
-    .select('*')
+    .select(`
+      *,
+      patrocinios(*)
+    `)
     .eq('id', id)
-    .single() as { data: PatrocinadorDB | null, error: any }
+    .single() as { data: PatrocinadorDB | null, error: Error | null }
 
   if (error || !patrocinador) {
     notFound()

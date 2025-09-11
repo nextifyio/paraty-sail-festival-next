@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Plus, Building2, ExternalLink, Edit } from 'lucide-react';
 import { createClient } from '@/lib/supabase-server';
 import { deletePatrocinador } from '../actions';
@@ -59,9 +60,11 @@ export default async function PatrocinadoresPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 flex-1">
                     {patrocinador.logo_url ? (
-                      <img
+                      <Image
                         src={patrocinador.logo_url}
                         alt={`Logo ${patrocinador.nome}`}
+                        width={64}
+                        height={64}
                         className="h-16 w-16 object-contain rounded-xl border-2 border-gray-200 bg-white p-2"
                       />
                     ) : (

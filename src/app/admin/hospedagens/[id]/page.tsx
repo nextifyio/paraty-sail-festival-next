@@ -15,7 +15,7 @@ export default async function EditHospedagem({ params }: Props) {
     .from('hospedagens')
     .select('*')
     .eq('id', id)
-    .single() as { data: Hospedagem | null, error: any }
+    .single() as { data: Hospedagem | null, error: Error | null }
 
   if (error || !hospedagem) {
     notFound()

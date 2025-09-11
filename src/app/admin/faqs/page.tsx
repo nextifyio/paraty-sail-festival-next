@@ -20,7 +20,7 @@ export default async function FAQsPage() {
   const { data: faqs, error } = await supabase
     .from('faqs')
     .select('*')
-    .order('ordem') as { data: FAQ[] | null, error: any }
+    .order('ordem') as { data: FAQ[] | null, error: Error | null }
 
   if (error) {
     console.error('Error fetching faqs:', error)

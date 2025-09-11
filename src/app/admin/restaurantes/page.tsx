@@ -20,7 +20,7 @@ export default async function RestaurantesPage() {
   const { data: restaurantes, error } = await supabase
     .from('restaurantes')
     .select('*')
-    .order('nome') as { data: Restaurante[] | null, error: any }
+    .order('nome') as { data: Restaurante[] | null, error: Error | null }
 
   if (error) {
     console.error('Error fetching restaurantes:', error)
