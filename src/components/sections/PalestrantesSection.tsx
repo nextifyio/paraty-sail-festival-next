@@ -14,7 +14,7 @@ const getInstagramUsername = (url: string) => {
 };
 
 // Função para obter a imagem do palestrante
-const getLocalProfileImage = (palestrante: any) => {
+const getLocalProfileImage = (palestrante: { imagem?: string }) => {
   return palestrante.imagem || null;
 };
 
@@ -39,7 +39,6 @@ export default function PalestrantesSection() {
           >
             <div className="text-center mb-4 flex-grow">
               {(() => {
-                const username = getInstagramUsername(palestrante.instagram);
                 const localImage = getLocalProfileImage(palestrante);
                 const hasValidInstagram = palestrante.instagram && palestrante.instagram !== 'https://www.instagram.com/';
                 

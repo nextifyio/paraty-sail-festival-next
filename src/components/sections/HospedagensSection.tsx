@@ -59,7 +59,7 @@ export default function HospedagensSection() {
       >
         <h3 className="text-2xl font-bold text-teal-800 mb-4">Como Obter o Desconto</h3>
         <p className="text-gray-600 mb-6">
-          Mencione "Paraty Sail Festival 2025" ao fazer sua reserva para garantir o desconto especial.
+          Mencione &quot;Paraty Sail Festival 2025&quot; ao fazer sua reserva para garantir o desconto especial.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <div className="flex items-center space-x-2 bg-white px-4 py-2 rounded-lg">

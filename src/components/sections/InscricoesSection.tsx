@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Anchor, Award, Users, ExternalLink, Trophy, DollarSign } from 'lucide-react';
+import { Anchor, ExternalLink, Trophy, DollarSign } from 'lucide-react';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
 export default function InscricoesSection() {

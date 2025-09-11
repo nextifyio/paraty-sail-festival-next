@@ -14,7 +14,7 @@ const getInstagramUsername = (url: string) => {
 };
 
 // Função para obter a imagem da atração
-const getLocalProfileImage = (atracao: any) => {
+const getLocalProfileImage = (atracao: { imagem?: string }) => {
   return atracao.imagem || null;
 };
 
@@ -39,7 +39,6 @@ export default function AtracoesSection() {
           >
             <div className="text-center mb-4 flex-grow">
               {(() => {
-                const username = getInstagramUsername(atracao.instagram);
                 const localImage = getLocalProfileImage(atracao);
                 const hasValidInstagram = atracao.instagram && atracao.instagram !== 'https://www.instagram.com/' && atracao.instagram !== '';
                 

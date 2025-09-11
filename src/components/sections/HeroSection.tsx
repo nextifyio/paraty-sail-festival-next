@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, ChevronDown } from 'lucide-react';
-import Image from 'next/image';
 
 interface HeroSectionProps {
   onScrollToSection: (sectionId: string) => void;
