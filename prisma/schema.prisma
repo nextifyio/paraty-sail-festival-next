@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PessoaFestival {
+  id           String @id @default(uuid())
+  nome         String
+  especialidade String
+  bio          String
+  instagram    String
+  imagem       String?
+  tipo         TipoPessoa
+  ativo        Boolean @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  
+  // Relacionamento com atividades
+  atividades   AtividadeFestival[]
+  
+  @@map("pessoas_festival")
+}
+
+model AtividadeFestival {
+  id         String @id @default(uuid())
+  titulo     String
+  tipo       TipoAtividade
+  dia        String
+  data       String
+  horario    String
+  detalhes   String
+  local      String?
+  pessoa_id  String?
+  ativo      Boolean @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  
+  // Relacionamento com pessoa
+  pessoa     PessoaFestival? @relation(fields: [pessoa_id], references: [id])
+  
+  @@map("atividades_festival")
+}
+
+model Patrocinador {
+  id         String @id @default(uuid())
+  nome       String
+  logo       String?
+  link       String?
+  nivel      NivelPatrocinio
+  ativo      Boolean @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  
+  @@map("patrocinadores")
+}
+
+model Hospedagem {
+  id           String @id @default(uuid())
+  nome         String
+  descricao    String
+  desconto     String?
+  contato      String
+  localizacao  String
+  ativo        Boolean @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  
+  @@map("hospedagens")
+}
+
+model Restaurante {
+  id           String @id @default(uuid())
+  nome         String
+  especialidade String
+  endereco     String
+  telefone     String
+  cardapio     String?
+  ativo        Boolean @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  
+  @@map("restaurantes")
+}
+
+model FAQ {
+  id         String @id @default(uuid())
+  pergunta   String
+  resposta   String
+  ordem      Int @default(0)
+  ativo      Boolean @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  
+  @@map("faqs")
+}
+
+model ItemGenerico {
+  id         String @id @default(uuid())
+  tipo       String // Ex: "evento_especial", "anuncio", "configuracao"
+  dados      Json   // Dados flexíveis em formato JSON
+  ativo      Boolean @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  
+  @@map("itens_genericos")
+}
+
+// Enums
+enum TipoPessoa {
+  palestrante
+  atracao
+}
+
+enum TipoAtividade {
+  palestra
+  show
+  workshop
+  competicao
+  regata
+  cultura
+  premiacao
+  abertura
+  encerramento
+  homenagem
+  kids
+}
+
+enum NivelPatrocinio {
+  master
+  ouro
+  prata
+  bronze
+}
