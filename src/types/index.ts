@@ -2,8 +2,10 @@ export interface Palestrante {
   nome: string;
   especialidade: string;
   bio: string;
+  instagram: string;
   dia: string;
   horario: string;
+  imagem?: string;
 }
 
 export interface Evento {

@@ -57,15 +57,15 @@ export default function InscricoesSection() {
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
             <Anchor className="mx-auto mb-4 text-amber-300" size={32} />
             <h4 className="text-lg font-semibold mb-2">Categorias</h4>
-            <p className="text-teal-100 text-sm">Cruzeiro</p>
-            <p className="text-teal-100 text-sm">Sofisticada RGS</p>
-            <p className="text-teal-100 text-sm">Sofisticada RGS2</p>
-            <p className="text-teal-100 text-sm">Clássico</p>
+            <p className="text-teal-100 text-sm">Força Livre: hi-performance</p>
+            <p className="text-teal-100 text-sm">Aço: Qualquer tamanho</p>
+            <p className="text-teal-100 text-sm">Clássico: Qualquer tamanho</p>
+            <p className="text-teal-100 text-sm">Cruzeiro: dividida por pés</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
             <Trophy className="mx-auto mb-4 text-amber-300" size={32} />
             <h4 className="text-lg font-semibold mb-2">Premiação</h4>
-            <p className="text-teal-100 text-sm">Para 1o, 2o e 3o lugar</p>
+            <p className="text-teal-100 text-sm">Para 1º, 2º e 3º lugar</p>
             <p className="text-teal-100 text-sm">Recepção para os participantes (no palco canoa de cerveja e refri free, para quem participou), obrigatório uso da pulseira e camiseta.</p>
           </div>
         </motion.div>

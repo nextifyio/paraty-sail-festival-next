@@ -5,50 +5,37 @@ import {
   Hospedagem,
   Restaurante,
   FAQ
-} from '@/types';
-
-export const palestrantes: Palestrante[] = [
-  {
-    nome: "Orlando Salomão",
-    especialidade: "Propulsão Elétrica e baterias de lithium",
-    bio: "Empresa que desenvolve soluções inteligentes para Veleiro.",
-    instagram: "https://www.instagram.com/alnitak.nautica/",
-    dia: "Quinta-Feira",
-    horario: "10:00h às 12:00h",
-    imagem: "/images/orlando-salomao.jpg"
+} from '@/types  {
+    nome: "Chris Amaral",
+    especialidade: "ElaVela, escola de navegação oceânica para mulheres.",
+    bio: "Velejadora e skipper com experiência internacional, moradora a bordo há 26 anos, Chris, navegou por 2 anos a costa brasileira a bordo do seu 22 pés sem motor, fez várias viagens ate Patagonia. "No mar, com as forças da Natureza, o velejar é um lugar onde só se pode habitar com a presença."",
+    instagram: "https://www.instagram.com/chrisamaral_oficial/",
+    dia: "Domingo",
+    horario: "10:00h",
+    imagem: "/images/chris-amaral.jpg"
   },
   {
-    nome: "Ricardo e Fernanda Eleutheria",
-    especialidade: "Iniciação na Vela",
-    bio: " Casal de Velejadores do Sul do Brasil, decidem mudar para Paraty com seu veleiro Eleutheria, um Fast 345, atualmente conquistaram a homologação da Marinha do Brasil, para dar o curso e a certificação de arrais amador.",
-    instagram: "https://www.instagram.com/veleiroeleutheria/",
-    dia: "Quinta-Feira",
-    horario: "11:30h às 12:50h",
-    imagem: "/images/ricardo-fernanda.jpg"
-  },
+    nome: "Paulo Rodrigo Moreira",
+    especialidade: "Do Campo ao Mar",
+    bio: "Velejador e skipper profissional, instrutor de velas, entre outros trabalhos na área náutica. Trabalha também em defesa da mata atlântica na sua propriedade.",
+    instagram: "https://www.instagram.com/skipperrodrigo/",
+    dia: "Domingo",
+    horario: "12:30h",
+    imagem: "/images/paulo-rodrigo.jpg"
+  } palestrantes: Palestrante[] = [
+  // {
+  //   nome: "Amyr Klink",
+  //   especialidade: "Navegador e Explorador",
+  //   bio: "Homenagem especial ao maior navegador brasileiro",
+  //   instagram: "https://www.instagram.com/",
+  //   dia: "Sábado",
+  //   horario: "19:00h"
+  // },
   {
-    nome: "Anjos do Mar: Marcelo Ulysses",
-    especialidade: "1º Socorros e demonstração de equipamentos de salvatagem",
-    bio: "Como funcionam os equipamentos de salvatagem.",
-    instagram: "https://www.instagram.com/anjosdomarbr/",
-    dia: "Quinta-Feira",
-    horario: "13:50h às 15:10h",
-    imagem: "/images/marcelo.jpg"
-  },
-  {
-    nome: "Veleiro Andorinha: Carla Lopes",
-    especialidade: "Os erros que cometi na reforma do meu veleiro",
-    bio: "Engenheira e Velejadora em seu currículo, já participou de travessias oceânicas pelo atlântico e antártica., mora a bordo do seu Fast 310 e recentemente fez uma reforma e agora quer nos contar.",
-    instagram: "https://www.instagram.com/lopes_carla/",
-    dia: "Quinta-Feira",
-    horario: "15:20h às 16:40h",
-    imagem: "/images/carla-lopes.jpg"
-  },
-  {
-    nome: "Charlie Flesch",
-    especialidade: "Como se tornar capaz de enfrentar o Drake?",
-    bio: "Velejador experiente, com 6 viagens para a Antártica  ensina sobre navegar em lugares mais remotos como o Drake.",
-    instagram: "https://www.instagram.com/homozapiens/",
+    nome: "Charles Flesch",
+    especialidade: "Especialista em Vela",
+    bio: "Palestrante renomado no mundo náutico",
+    instagram: "https://www.instagram.com/",
     dia: "Sábado",
     horario: "11:00h",
     imagem: "/images/charles-flesch.jpg"
@@ -63,22 +50,49 @@ export const palestrantes: Palestrante[] = [
     imagem: "/images/dalminho.jpg"
   },
   {
-    nome: "Giovanni Dolif Hashtag.ceu",
-    especialidade: "Meteorologia para todos",
-    bio: "Doutor e mestre na área da meteorologia na USP, velejador e apaixonado pelo céu e mar, vem dividir conosco um pouco do seu conhecimento.",
-    instagram: "https://www.instagram.com/hashtag.ceu/",
-    dia: "Sábado",
-    horario: "14:40h às 16:10h",
-    imagem: "/images/giovanni.jpg"
+    nome: "Ricardo e Fernanda Eleutheria",
+    especialidade: "Iniciação na Vela",
+    bio: "Como iniciar na vela e tirar o Arrais",
+    instagram: "https://www.instagram.com/",
+    dia: "Quinta",
+    horario: "13:00h",
+    imagem: "/images/ricardo-fernanda.jpg"
   },
   {
     nome: "Velho Jack",
-    especialidade: "O que eu analiso em um veleiro antes de comprar!",
-    bio: "Morando a bordo com sua esposa Angel há 10 anos em Paraty, logo em seguida seu filho Kurt Dali, veio fazer sociedade e trabalham juntos avaliando e vendendo veleiro pelo Brasil todo. Com canal no Youtube e Instagram, ensinam muitas curiosidades de modelos de barcos, manutenções e vida a bordo.",
-    instagram: "https://www.instagram.com/velhojacksn/",
+    especialidade: "Primeiro Veleiro",
+    bio: "Como avaliar seu primeiro veleiro",
+    instagram: "https://www.instagram.com/",
     dia: "Sábado",
-    horario: "16:20h às 17:50h",
+    horario: "16:30h",
     imagem: "/images/velho-jack.jpg"
+  },
+  {
+    nome: "Cecília Veleiro Planckton",
+    especialidade: "Homeschooling a Bordo",
+    bio: "Crescer no mar: Educação e vida a bordo.",
+    instagram: "https://www.instagram.com/",
+    dia: "Domingo",
+    horario: "11:00h",
+    imagem: "/images/cecilia.jpg"
+  },
+  {
+    nome: "Carla Lopes Veleiro Andorinha",
+    especialidade: "",
+    bio: "Os erros que cometi na reforma do meu veleiro.",
+    instagram: "https://www.instagram.com/",
+    dia: "??",
+    horario: "??",
+    imagem: "/images/carla-lopes.jpg"
+  },
+  {
+    nome: "Giovanni Dolif Hashtag.ceu",
+    especialidade: "Meteorologia para todos",
+    bio: "",
+    instagram: "https://www.instagram.com/",
+    dia: "??",
+    horario: "??",
+    imagem: "/images/giovanni.jpg"
   },
   {
     nome: "Adriano Plotzki Hasthtag Sal",
@@ -90,13 +104,13 @@ export const palestrantes: Palestrante[] = [
     imagem: "/images/adriano.jpg"
   },
   {
-    nome: "Chris Amaral",
-    especialidade: "ElaVela, escola de navegação oceânica para mulheres.",
-    bio: "Velejadora e skipper com experiência internacional, moradora a bordo há 26 anos, Chris, navegou por 2 anos a costa brasileira a bordo do seu 22 pés sem motor, fez várias viagens ate Patagonia. “No mar, com as forças da Natureza, o velejar é um lugar onde só se pode habitar com a presença.”",
-    instagram: "https://www.instagram.com/chrisamaral_oficial/",
-    dia: "Domingo",
-    horario: "10:00h",
-    imagem: "/images/chris_amaral.jpg"
+    nome: "Marcelo Anjos do Mar",
+    especialidade: "Meteorologia para todos",
+    bio: "Como funcionam os equipamentos de salvatagem.",
+    instagram: "https://www.instagram.com/",
+    dia: "??",
+    horario: "??",
+    imagem: "/images/marcelo.jpg"
   },
   {
     nome: "Beijupira: Priscila L. Silva",
@@ -108,22 +122,20 @@ export const palestrantes: Palestrante[] = [
     imagem: "/images/priscila-claudio.jpg"
   },
   {
+    nome: "Chris Amaral",
+    especialidade: "ElaVela, escola de navegação oceânica para mulheres.",
+    bio: "Velejadora e skipper com experiência internacional, moradora a bordo há 26 anos, Chris, navegou por 2 anos a costa brasileira a bordo do seu 22 pés sem motor, fez várias viagens ate Patagonia. “No mar, com as forças da Natureza, o velejar é um lugar onde só se pode habitar com a presença.”",
+    instagram: "https://www.instagram.com/chrisamaral_oficial/",
+    dia: "Domingo",
+    horario: "10:00h"
+  },
+  {
     nome: "Paulo Rodrigo Moreira",
     especialidade: "Do Campo ao Mar",
     bio: "Velejador e skipper profissional, instrutor de velas, entre outros trabalhos na área náutica. Trabalha também em defesa da mata atlântica na sua propriedade.",
     instagram: "https://www.instagram.com/skipperrodrigo/",
     dia: "Domingo",
-    horario: "12:30h",
-    imagem: "/images/paulo-rodrigo.jpg"
-  },
-  {
-    nome: "Veleiro Planckton: Cecilia e Fábio",
-    especialidade: "Homeschooling a Bordo",
-    bio: "Crescer no mar: Educação e vida a bordo.",
-    instagram: "https://www.instagram.com/veleiro_planckton/",
-    dia: "Domingo",
-    horario: "17:00h às 18:20h",
-    imagem: "/images/cecilia.jpg"
+    horario: "12:30h"
   }
 ];
 
@@ -134,8 +146,7 @@ export const atracoes: Palestrante[] = [
     bio: "",
     instagram: "https://www.instagram.com/surflaskera/",
     dia: "Sábado",
-    horario: "11:00h",
-    imagem: "/images/mar-virado.jpg"
+    horario: "11:00h"
   },
   {
     nome: "Mamba",
@@ -143,8 +154,7 @@ export const atracoes: Palestrante[] = [
     bio: "",
     instagram: "",
     dia: "Sábado",
-    horario: "13:00h",
-    imagem: "/images/mamba.jpg"
+    horario: "13:00h"
   },
   {
     nome: "Mundiá Carimbó",
@@ -152,8 +162,7 @@ export const atracoes: Palestrante[] = [
     bio: "",
     instagram: "https://www.instagram.com/mundiacarimbo/",
     dia: "Quinta",
-    horario: "13:00h",
-    imagem: "/images/mundia-carimbo.jpg"
+    horario: "13:00h"
   },
   {
     nome: "Maracatu Tira Mofo",
@@ -161,8 +170,7 @@ export const atracoes: Palestrante[] = [
     bio: "",
     instagram: "https://www.instagram.com/maracatutiraomofo/",
     dia: "Sábado",
-    horario: "16:30h",
-    imagem: "/images/maracatu-tira-mofo.jpg"
+    horario: "16:30h"
   },
   {
     nome: "Capitão Rock",
@@ -170,8 +178,7 @@ export const atracoes: Palestrante[] = [
     bio: "",
     instagram: "https://www.instagram.com/capitaorockoficial/",
     dia: "Domingo",
-    horario: "11:00h",
-    imagem: "/images/capitao-rock.jpg"
+    horario: "11:00h"
   },
   {
     nome: "Leonidas",
@@ -179,8 +186,7 @@ export const atracoes: Palestrante[] = [
     bio: "",
     instagram: "https://www.instagram.com/leonidasparaty/",
     dia: "??",
-    horario: "??",
-    imagem: "/images/leonidas.jpg"
+    horario: "??"
   },
   {
     nome: "DJ Tugão",
@@ -188,8 +194,7 @@ export const atracoes: Palestrante[] = [
     bio: "",
     instagram: "https://www.instagram.com/veleiroalegria/",
     dia: "??",
-    horario: "??",
-    imagem: "/images/dj-tugao.jpg"
+    horario: "??"
   }
 ];
 

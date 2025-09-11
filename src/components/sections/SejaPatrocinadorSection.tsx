@@ -65,15 +65,21 @@ export default function SejaPatrocinadorSection() {
               </div>
               <div className="bg-gradient-to-r from-gray-300 to-gray-400 text-white p-4 rounded-lg">
                 <h5 className="font-bold">Ouro</h5>
-                <p className="text-sm">Stand premium + palestras</p>
+                <p className="text-sm">Logo em destaque no site e material</p>
+                <p className="text-sm">Stand (3x3²) em boa localização</p>
+                <p className="text-sm">Podcast , acesso a sala vip</p>
               </div>
               <div className="bg-gradient-to-r from-gray-300 to-gray-400 text-white p-4 rounded-lg">
                 <h5 className="font-bold">Prata</h5>
-                <p className="text-sm">Stand + materiais oficiais</p>
+                <p className="text-sm">Logo no site e material impresso</p>
+                <p className="text-sm">Stand, podcast</p>
+                <p className="text-sm">Menção nas redes sociais do evento</p>
               </div>
               <div className="bg-gradient-to-r from-gray-300 to-gray-400 text-white p-4 rounded-lg">
                 <h5 className="font-bold">Bronze</h5>
-                <p className="text-sm">Exposição básica + networking</p>
+                <p className="text-sm">Logo no site do evento</p>
+                <p className="text-sm">Espaço para banner no evento</p>
+                <p className="text-sm">Distribuição de material promocional</p>
               </div>
             </div>
           </div>
