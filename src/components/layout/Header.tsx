@@ -109,15 +109,15 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Image src="/images/logo.jpeg" alt="Paraty Sail Festival" width={48} height={48} className="h-12 w-auto" />
+            <Image src="/images/logo-header-transp.png" alt="Paraty Sail Festival" width={48} height={48} className="h-12 w-auto" />
             <div className="hidden md:block">
-              <h1 className="text-xl font-bold text-teal-800">Paraty Sail Festival</h1>
-              <p className="text-sm text-amber-600">2025</p>
+              {/* <h1 className="text-xl font-bold text-teal-800">Paraty Sail Festival</h1> */}
+              {/* <p className="text-sm text-amber-600">2025</p> */}
             </div>
           </motion.div>
 
           {/* Desktop Menu */}
-          <nav className="hidden lg:flex space-x-6">
+          <nav className="hidden lg:flex space-x-12">
             {menuItems.map((item) => (
               <button
                 key={item.id}
