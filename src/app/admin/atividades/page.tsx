@@ -312,7 +312,7 @@ export default function AtividadesPage() {
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhuma atividade encontrada</h3>
             <p className="text-gray-500 mb-6">
-              Não há atividades do tipo "{tipoLabels[selectedTipo] || selectedTipo}"
+              Não há atividades do tipo &ldquo;{tipoLabels[selectedTipo] || selectedTipo}&rdquo;
             </p>
             <button
               onClick={() => handleTipoChange('todos')}
