@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase-server'
 import { Hospedagem } from '@/types'
 import Link from 'next/link'
 import { Edit, Plus, MapPin, Phone, Home, Percent } from 'lucide-react'
-import { deleteHospedagem } from '../actions'
+import { deleteHospedagem } from './actions'
 import { DeleteForm } from '@/components/admin/DeleteForm'
 
 function DeleteButton({ id }: { id: string }) {

@@ -16,7 +16,7 @@ const menuItems: MenuItem[] = [
   { id: 'programacao', label: 'Programação' },
   { id: 'inscricoes', label: '1ª Regata Amyr Klink' },
   { id: 'parceiros', label: 'Parceiros' },
-  { id: 'patrocinadores', label: 'Patrocinadores' },
+  // { id: 'patrocinadores', label: 'Patrocinadores' },
   { id: 'patrocinio', label: 'Seja Patrocinador' },
   { id: 'como-chegar', label: 'Como Chegar' },
   { id: 'faq', label: 'FAQ' }

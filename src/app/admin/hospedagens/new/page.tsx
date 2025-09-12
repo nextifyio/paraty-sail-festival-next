@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { createHospedagem } from '../actions'
 import { useNotifications } from '@/components/notifications/NotificationProvider'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -25,16 +25,24 @@ export default function NewHospedagem() {
     setLoading(true)
 
     try {
-      const { data, error } = await supabase
-        .from('hospedagens')
-        .insert([formData])
-        .select()
+      const formDataObj = new FormData()
+      formDataObj.append('nome', formData.nome)
+      formDataObj.append('descricao', formData.descricao)
+      formDataObj.append('desconto', formData.desconto)
+      formDataObj.append('contato', formData.contato)
+      formDataObj.append('localizacao', formData.localizacao)
+      formDataObj.append('ativo', formData.ativo.toString())
 
-      if (error) throw error
+      const result = await createHospedagem(formDataObj)
 
-      success('Hospedagem criada!', 'A hospedagem foi adicionada com sucesso.');
-      router.push('/admin/hospedagens')
-      router.refresh()
+      if (result.success) {
+        success('Hospedagem criada!', result.message)
+        setTimeout(() => {
+          router.push('/admin/hospedagens')
+        }, 1500)
+      } else {
+        showError('Erro ao criar hospedagem', result.error || 'Tente novamente mais tarde.')
+      }
     } catch (error) {
       console.error('Error creating hospedagem:', error)
       showError('Erro ao criar hospedagem', 'Tente novamente mais tarde.')

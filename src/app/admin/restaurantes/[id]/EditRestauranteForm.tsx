@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { updateRestaurante } from '../actions'
 import { useNotifications } from '@/components/notifications/NotificationProvider'
 import Link from 'next/link'
 import type { Restaurante } from '@/types'
@@ -29,21 +29,25 @@ export default function EditRestauranteForm({ restaurante }: EditRestauranteForm
     setLoading(true)
 
     try {
-      const { error } = await supabase
-        .from('restaurantes')
-        .update({
-          ...formData,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', restaurante.id)
+      const formDataToSend = new FormData()
+      formDataToSend.append('nome', formData.nome)
+      formDataToSend.append('especialidade', formData.especialidade)
+      formDataToSend.append('endereco', formData.endereco)
+      formDataToSend.append('telefone', formData.telefone)
+      formDataToSend.append('cardapio', formData.cardapio)
+      formDataToSend.append('ativo', formData.ativo ? 'true' : 'false')
 
-      if (error) throw error
-
-      success('Restaurante atualizado!', 'As informações foram salvas com sucesso.')
-      router.push('/admin/restaurantes')
+      const result = await updateRestaurante(restaurante.id, formDataToSend)
+      
+      if (result.success) {
+        success('Restaurante atualizado!', 'As informações foram salvas com sucesso.')
+        router.push('/admin/restaurantes')
+      } else {
+        showError('Erro ao atualizar restaurante', result.error || 'Tente novamente mais tarde.')
+      }
     } catch (error) {
       console.error('Error updating restaurante:', error)
-      showError('Erro ao atualizar restaurante', 'Tente novamente mais tarde.')
+      showError('Erro ao atualizar restaurante', error instanceof Error ? error.message : 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }

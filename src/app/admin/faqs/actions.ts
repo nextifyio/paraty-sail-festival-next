@@ -1,12 +1,19 @@
 'use server'
 
-import { createClient } from '@/lib/supabase-server'
+import { createSupabaseAdmin } from '@/lib/supabase'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { requireAuthForAction } from '@/lib/auth-guard'
 
 export async function createFAQ(formData: FormData) {
   try {
-    const supabase = await createClient()
+    // ✅ Verificar autenticação
+    const authResult = await requireAuthForAction()
+    if (!authResult.isAuthenticated) {
+      throw new Error(authResult.error || 'Não autorizado')
+    }
+
+    const supabase = createSupabaseAdmin()
 
     // Extrair campos do formulário
     const pergunta = formData.get('pergunta') as string
@@ -50,7 +57,13 @@ export async function createFAQ(formData: FormData) {
 
 export async function updateFAQ(id: string, formData: FormData): Promise<{ success: boolean; error?: string }> {
   try {
-    const supabase = await createClient()
+    // ✅ Verificar autenticação
+    const authResult = await requireAuthForAction()
+    if (!authResult.isAuthenticated) {
+      return { success: false, error: authResult.error || 'Não autorizado' }
+    }
+
+    const supabase = createSupabaseAdmin()
 
     // Extrair campos do formulário
     const pergunta = formData.get('pergunta') as string
@@ -110,7 +123,13 @@ export async function updateFAQ(id: string, formData: FormData): Promise<{ succe
 
 export async function deleteFAQ(id: string) {
   try {
-    const supabase = await createClient()
+    // ✅ Verificar autenticação
+    const authResult = await requireAuthForAction()
+    if (!authResult.isAuthenticated) {
+      return { success: false, error: authResult.error || 'Não autorizado' }
+    }
+
+    const supabase = createSupabaseAdmin()
 
     const { error } = await supabase
       .from('faqs')

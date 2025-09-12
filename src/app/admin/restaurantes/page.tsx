@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase-server'
 import { Restaurante } from '@/types'
 import Link from 'next/link'
 import { Edit, Plus, MapPin, Phone, UtensilsCrossed, FileText } from 'lucide-react'
-import { deleteRestaurante } from '../actions'
+import { deleteRestaurante } from './actions'
 import { DeleteForm } from '@/components/admin/DeleteForm'
 
 function DeleteButton({ id }: { id: string }) {

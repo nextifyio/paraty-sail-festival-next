@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { createRestaurante } from '../actions'
 import { useNotifications } from '@/components/notifications/NotificationProvider'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -25,19 +25,19 @@ export default function NewRestaurante() {
     setLoading(true)
 
     try {
-      const { data, error } = await supabase
-        .from('restaurantes')
-        .insert([formData])
-        .select()
+      const formDataToSend = new FormData()
+      formDataToSend.append('nome', formData.nome)
+      formDataToSend.append('especialidade', formData.especialidade)
+      formDataToSend.append('endereco', formData.endereco)
+      formDataToSend.append('telefone', formData.telefone)
+      formDataToSend.append('cardapio', formData.cardapio)
+      formDataToSend.append('ativo', formData.ativo ? 'true' : 'false')
 
-      if (error) throw error
-
-      success('Restaurante criado!', 'O restaurante foi adicionado com sucesso.');
-      router.push('/admin/restaurantes')
-      router.refresh()
+      await createRestaurante(formDataToSend)
+      success('Restaurante criado!', 'O restaurante foi adicionado com sucesso.')
     } catch (error) {
       console.error('Error creating restaurante:', error)
-      showError('Erro ao criar restaurante', 'Tente novamente mais tarde.')
+      showError('Erro ao criar restaurante', error instanceof Error ? error.message : 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }

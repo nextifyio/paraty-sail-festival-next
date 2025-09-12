@@ -3,7 +3,7 @@ import { Pessoa } from '@/types'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Edit, Plus, User, Music, Mic, Trophy } from 'lucide-react'
-import { deletePessoa } from '../actions'
+import { deletePessoa } from './actions'
 import { DeleteForm } from '@/components/admin/DeleteForm'
 
 async function getPessoas() {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { updateHospedagem, deleteHospedagem } from '../actions'
 import { useNotifications } from '@/components/notifications/NotificationProvider'
 import { Hospedagem } from '@/types'
 import Link from 'next/link'
@@ -30,16 +30,24 @@ export default function EditHospedagemForm({ hospedagem }: Props) {
     setLoading(true)
 
     try {
-      const { error } = await supabase
-        .from('hospedagens')
-        .update(formData)
-        .eq('id', hospedagem.id)
+      const formDataObj = new FormData()
+      formDataObj.append('nome', formData.nome)
+      formDataObj.append('descricao', formData.descricao)
+      formDataObj.append('desconto', formData.desconto)
+      formDataObj.append('contato', formData.contato)
+      formDataObj.append('localizacao', formData.localizacao)
+      formDataObj.append('ativo', (formData.ativo || false).toString())
 
-      if (error) throw error
+      const result = await updateHospedagem(hospedagem.id, formDataObj)
 
-      success('Hospedagem atualizada!', 'As informações foram salvas com sucesso.');
-      router.push('/admin/hospedagens')
-      router.refresh()
+      if (result.success) {
+        success('Hospedagem atualizada!', result.message)
+        setTimeout(() => {
+          router.push('/admin/hospedagens')
+        }, 1500)
+      } else {
+        showError('Erro ao atualizar hospedagem', result.error || 'Tente novamente mais tarde.')
+      }
     } catch (error) {
       console.error('Error updating hospedagem:', error)
       showError('Erro ao atualizar hospedagem', 'Tente novamente mais tarde.')
@@ -61,16 +69,16 @@ export default function EditHospedagemForm({ hospedagem }: Props) {
 
     setLoading(true)
     try {
-      const { error } = await supabase
-        .from('hospedagens')
-        .delete()
-        .eq('id', hospedagem.id)
+      const result = await deleteHospedagem(hospedagem.id)
 
-      if (error) throw error
-
-      success('Hospedagem excluída!', 'A hospedagem foi removida com sucesso.');
-      router.push('/admin/hospedagens')
-      router.refresh()
+      if (result.success) {
+        success('Hospedagem excluída!', result.message)
+        setTimeout(() => {
+          router.push('/admin/hospedagens')
+        }, 1500)
+      } else {
+        showError('Erro ao excluir hospedagem', result.error || 'Tente novamente mais tarde.')
+      }
     } catch (error) {
       console.error('Error deleting hospedagem:', error)
       showError('Erro ao excluir hospedagem', 'Tente novamente mais tarde.')

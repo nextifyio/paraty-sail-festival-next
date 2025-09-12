@@ -2,24 +2,14 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { updatePatrocinador } from '../actions'
 import { useNotifications } from '@/components/notifications/NotificationProvider'
 import ImageUpload from '@/components/admin/ImageUpload'
 import Link from 'next/link'
-
-interface PatrocinadorDB {
-  id: string
-  nome: string
-  logo?: string
-  link?: string
-  nivel: 'master' | 'ouro' | 'prata' | 'bronze'
-  ativo: boolean
-  created_at: string
-  updated_at: string
-}
+import type { Patrocinador } from '@/types'
 
 interface EditPatrocinadorFormProps {
-  patrocinador: PatrocinadorDB
+  patrocinador: Patrocinador
 }
 
 export default function EditPatrocinadorForm({ patrocinador }: EditPatrocinadorFormProps) {
@@ -31,7 +21,7 @@ export default function EditPatrocinadorForm({ patrocinador }: EditPatrocinadorF
     nome: patrocinador.nome,
     link: patrocinador.link || '',
     nivel: patrocinador.nivel,
-    ativo: patrocinador.ativo
+    ativo: patrocinador.ativo ?? true
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,22 +29,26 @@ export default function EditPatrocinadorForm({ patrocinador }: EditPatrocinadorF
     setLoading(true)
 
     try {
-      const { error } = await supabase
-        .from('patrocinadores')
-        .update({
-          ...formData,
-          logo: logoUrl,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', patrocinador.id)
+      const formDataToSend = new FormData()
+      formDataToSend.append('nome', formData.nome)
+      formDataToSend.append('link', formData.link)
+      formDataToSend.append('nivel', formData.nivel)
+      formDataToSend.append('ativo', formData.ativo ? 'true' : 'false')
+      if (logoUrl) {
+        formDataToSend.append('logo', logoUrl)
+      }
 
-      if (error) throw error
-
-      success('Patrocinador atualizado!', 'As informações foram salvas com sucesso.')
-      router.push('/admin/patrocinadores')
+      const result = await updatePatrocinador(patrocinador.id, formDataToSend)
+      
+      if (result.success) {
+        success('Patrocinador atualizado!', 'As informações foram salvas com sucesso.')
+        router.push('/admin/patrocinadores')
+      } else {
+        showError('Erro ao atualizar patrocinador', result.error || 'Tente novamente mais tarde.')
+      }
     } catch (error) {
       console.error('Error updating patrocinador:', error)
-      showError('Erro ao atualizar patrocinador', 'Tente novamente mais tarde.')
+      showError('Erro ao atualizar patrocinador', error instanceof Error ? error.message : 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }

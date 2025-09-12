@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Plus, Building2, ExternalLink, Edit } from 'lucide-react';
 import { createClient } from '@/lib/supabase-server';
-import { deletePatrocinador } from '../actions';
+import { deletePatrocinador } from './actions';
 import { DeleteForm } from '@/components/admin/DeleteForm';
 
 async function getPatrocinadores() {
@@ -75,24 +75,24 @@ export default async function PatrocinadoresPage() {
                       <h3 className="text-lg font-semibold text-gray-900">
                         {patrocinador.nome}
                       </h3>
-                      {patrocinador.descricao && (
+                      {patrocinador.nome && (
                         <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-                          {patrocinador.descricao}
+                          {patrocinador.nome}
                         </p>
                       )}
                       <div className="mt-2 flex items-center space-x-3">
                         <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                          patrocinador.tipo === 'platina'
-                            ? 'bg-gray-100 text-gray-800'
-                            : patrocinador.tipo === 'ouro'
+                          patrocinador.nivel === 'master'
+                            ? 'bg-purple-100 text-purple-800'
+                            : patrocinador.nivel === 'ouro'
                             ? 'bg-yellow-100 text-yellow-800'
-                            : patrocinador.tipo === 'prata'
+                            : patrocinador.nivel === 'prata'
                             ? 'bg-blue-100 text-blue-800'
-                            : patrocinador.tipo === 'bronze'
+                            : patrocinador.nivel === 'bronze'
                             ? 'bg-orange-100 text-orange-800'
                             : 'bg-green-100 text-green-800'
                         }`}>
-                          {patrocinador.tipo?.charAt(0).toUpperCase() + patrocinador.tipo?.slice(1)}
+                          {patrocinador.nivel?.charAt(0).toUpperCase() + patrocinador.nivel?.slice(1)}
                         </span>
                         <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                           patrocinador.ativo 
@@ -101,14 +101,9 @@ export default async function PatrocinadoresPage() {
                         }`}>
                           {patrocinador.ativo ? 'Ativo' : 'Inativo'}
                         </span>
-                        {patrocinador.valor_patrocinio && (
-                          <span className="text-sm font-medium text-gray-700">
-                            R$ {patrocinador.valor_patrocinio.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                          </span>
-                        )}
-                        {patrocinador.website_url && (
+                        {(patrocinador.link || patrocinador.website) && (
                           <a
-                            href={patrocinador.website_url}
+                            href={patrocinador.link || patrocinador.website}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center space-x-1 text-teal-600 hover:text-teal-800 text-sm"
