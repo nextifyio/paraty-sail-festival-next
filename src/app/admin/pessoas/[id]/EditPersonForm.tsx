@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { supabase } from '@/lib/supabase';
+import { updatePessoa } from '../actions';
 import { useNotifications } from '@/components/notifications/NotificationProvider';
 import ImageUpload from '@/components/admin/ImageUpload';
 import Link from 'next/link';
@@ -60,25 +60,29 @@ export function EditPersonForm({ pessoa }: EditPersonFormProps) {
     setIsSubmitting(true);
     
     try {
-      const { error } = await supabase
-        .from('pessoas_festival')
-        .update({
-          nome: data.nome,
-          tipo: data.tipo,
-          especialidade: data.especialidade,
-          bio: data.bio,
-          instagram: data.instagram,
-          imagem: imageUrl,
-          ativo: data.ativo,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', pessoa.id);
+      const formData = new FormData();
+      formData.append('nome', data.nome);
+      formData.append('tipo', data.tipo);
+      formData.append('especialidade', data.especialidade);
+      formData.append('bio', data.bio);
+      formData.append('instagram', data.instagram);
+      formData.append('ativo', data.ativo.toString());
+      
+      if (imageUrl) {
+        formData.append('imagem', imageUrl);
+      }
 
-      if (error) throw error;
-
-      success('Participante atualizado!', 'As informações foram salvas com sucesso.');
-      router.push('/admin/pessoas');
-      router.refresh();
+      const result = await updatePessoa(pessoa.id, formData);
+      
+      if (result.success) {
+        success('Participante atualizado!', result.message);
+        // Aguardar um pouco para mostrar a notificação antes de redirecionar
+        setTimeout(() => {
+          router.push('/admin/pessoas');
+        }, 1500);
+      } else {
+        showError('Erro ao atualizar participante', result.error || 'Tente novamente mais tarde.');
+      }
     } catch (error) {
       console.error('Erro ao atualizar pessoa:', error);
       showError('Erro ao atualizar participante', 'Tente novamente mais tarde.');

@@ -13,7 +13,7 @@ export default function HeroSection({ onScrollToSection }: HeroSectionProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 to-amber-900/20"></div>
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(/images/golden-sunset.jpg)` }}
+        style={{ backgroundImage: `url(/images/igreja-veleiro.jpeg)` }}
       ></div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
       

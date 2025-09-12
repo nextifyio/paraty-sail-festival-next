@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { createPessoa } from '../actions'
 import { useNotifications } from '@/components/notifications/NotificationProvider'
 import ImageUpload from '@/components/admin/ImageUpload'
 import Link from 'next/link'
@@ -12,47 +12,33 @@ export default function NewPessoaPage() {
   const { success, error: showError } = useNotifications()
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
-  const [formData, setFormData] = useState({
-    nome: '',
-    tipo: 'palestrante' as 'palestrante' | 'atracao',
-    especialidade: '',
-    bio: '',
-    instagram: '',
-    ativo: true
-  })
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (formData: FormData) => {
     setLoading(true)
-
+    
     try {
-      const { data, error } = await supabase
-        .from('pessoas_festival')
-        .insert([{
-          ...formData,
-          imagem: imageUrl
-        }])
-        .select()
-
-      if (error) throw error
-
-      success('Participante criado!', 'O participante foi adicionado com sucesso.')
-      router.push('/admin/pessoas')
-      router.refresh()
+      // Adicionar URL da imagem ao FormData se existir
+      if (imageUrl) {
+        formData.set('imagem', imageUrl)
+      }
+      
+      const result = await createPessoa(formData)
+      
+      if (result.success) {
+        success('Participante criado!', result.message)
+        // Aguardar um pouco para mostrar a notificação antes de redirecionar
+        setTimeout(() => {
+          router.push('/admin/pessoas')
+        }, 1500)
+      } else {
+        showError('Erro ao criar participante', result.error || 'Tente novamente mais tarde.')
+      }
     } catch (error) {
       console.error('Error creating pessoa:', error)
       showError('Erro ao criar participante', 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
-    }))
   }
 
   return (
@@ -70,7 +56,7 @@ export default function NewPessoaPage() {
       </div>
 
       <div className="bg-white shadow rounded-lg p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form action={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="nome" className="block text-sm font-medium text-gray-700">
@@ -81,8 +67,6 @@ export default function NewPessoaPage() {
                 name="nome"
                 id="nome"
                 required
-                value={formData.nome}
-                onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                 placeholder="Ex: João Silva"
               />
@@ -96,10 +80,9 @@ export default function NewPessoaPage() {
                 name="tipo"
                 id="tipo"
                 required
-                value={formData.tipo}
-                onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
               >
+                <option value="">Selecione...</option>
                 <option value="palestrante">Palestrante</option>
                 <option value="atracao">Atração Musical</option>
               </select>
@@ -115,8 +98,6 @@ export default function NewPessoaPage() {
               name="especialidade"
               id="especialidade"
               required
-              value={formData.especialidade}
-              onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
               placeholder="Ex: Navegação Oceânica, Rock Brasileiro, etc."
             />
@@ -131,8 +112,6 @@ export default function NewPessoaPage() {
               id="bio"
               rows={4}
               required
-              value={formData.bio}
-              onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
               placeholder="Conte um pouco sobre esta pessoa..."
             />
@@ -148,15 +127,13 @@ export default function NewPessoaPage() {
                 name="instagram"
                 id="instagram"
                 required
-                value={formData.instagram}
-                onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                 placeholder="https://www.instagram.com/usuario/"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="imagem" className="block text-sm font-medium text-gray-700 mb-2">
                 Foto do Participante
               </label>
               <ImageUpload
@@ -165,24 +142,23 @@ export default function NewPessoaPage() {
                 onImageChange={setImageUrl}
               />
             </div>
+          </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Status
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Status
+            </label>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="ativo"
+                id="ativo"
+                defaultChecked
+                className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
+              />
+              <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
+                Ativo (aparece no site público)
               </label>
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="ativo"
-                  id="ativo"
-                  checked={formData.ativo}
-                  onChange={handleChange}
-                  className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
-                />
-                <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
-                  Ativo (aparece no site público)
-                </label>
-              </div>
             </div>
           </div>
 

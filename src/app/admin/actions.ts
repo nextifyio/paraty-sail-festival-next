@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase-server'
+import { createSupabaseAdmin } from '@/lib/supabase'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -12,6 +13,7 @@ interface PessoaFormData {
   instagram: string
   imagem?: string
   tipo: 'palestrante' | 'atracao'
+  ativo?: boolean
 }
 
 interface AtividadeFormData {
@@ -57,15 +59,20 @@ interface FAQFormData {
 
 // CRUD Pessoas
 export async function createPessoa(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin() // Usar admin client para operações de escrita
 
-  const data: PessoaFormData = {
+  const ativo = formData.get('ativo') === 'on' || formData.get('ativo') === 'true' || true // default true para novos registros
+
+  const data = {
     nome: formData.get('nome') as string,
     especialidade: formData.get('especialidade') as string,
     bio: formData.get('bio') as string,
     instagram: formData.get('instagram') as string,
-    imagem: formData.get('imagem') as string || undefined,
-    tipo: formData.get('tipo') as 'palestrante' | 'atracao'
+    imagem: formData.get('imagem') as string || null,
+    tipo: formData.get('tipo') as 'palestrante' | 'atracao',
+    ativo: ativo,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   }
 
   const { error } = await supabase
@@ -81,16 +88,20 @@ export async function createPessoa(formData: FormData) {
   redirect('/admin/pessoas')
 }
 
-export async function updatePessoa(id: string, formData: FormData) {
-  const supabase = await createClient()
+export async function updatePessoaForm(id: string, formData: FormData) {
+  const supabase = createSupabaseAdmin() // Usar admin client para operações de escrita
 
-  const data: PessoaFormData = {
+  const ativo = formData.get('ativo') === 'on' || formData.get('ativo') === 'true'
+
+  const data = {
     nome: formData.get('nome') as string,
     especialidade: formData.get('especialidade') as string,
     bio: formData.get('bio') as string,
     instagram: formData.get('instagram') as string,
-    imagem: formData.get('imagem') as string || undefined,
-    tipo: formData.get('tipo') as 'palestrante' | 'atracao'
+    imagem: formData.get('imagem') as string || null,
+    tipo: formData.get('tipo') as 'palestrante' | 'atracao',
+    ativo: ativo,
+    updated_at: new Date().toISOString()
   }
 
   const { error } = await supabase
@@ -108,7 +119,7 @@ export async function updatePessoa(id: string, formData: FormData) {
 }
 
 export async function deletePessoa(id: string) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const { error } = await supabase
     .from('pessoas_festival')
@@ -125,7 +136,7 @@ export async function deletePessoa(id: string) {
 
 // CRUD Atividades
 export async function createAtividade(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: AtividadeFormData = {
     titulo: formData.get('titulo') as string,
@@ -152,7 +163,7 @@ export async function createAtividade(formData: FormData) {
 }
 
 export async function updateAtividadeOld(id: string, formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: AtividadeFormData = {
     titulo: formData.get('titulo') as string,
@@ -180,7 +191,7 @@ export async function updateAtividadeOld(id: string, formData: FormData) {
 }
 
 export async function deleteAtividade(id: string) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const { error } = await supabase
     .from('atividades_festival')
@@ -197,7 +208,7 @@ export async function deleteAtividade(id: string) {
 
 // CRUD Patrocinadores
 export async function createPatrocinador(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: PatrocinadorFormData = {
     nome: formData.get('nome') as string,
@@ -221,7 +232,7 @@ export async function createPatrocinador(formData: FormData) {
 }
 
 export async function updatePatrocinador(id: string, formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: PatrocinadorFormData = {
     nome: formData.get('nome') as string,
@@ -246,7 +257,7 @@ export async function updatePatrocinador(id: string, formData: FormData) {
 }
 
 export async function deletePatrocinador(id: string) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const { error } = await supabase
     .from('patrocinadores')
@@ -263,7 +274,7 @@ export async function deletePatrocinador(id: string) {
 
 // CRUD Hospedagens
 export async function createHospedagem(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: HospedagemFormData = {
     nome: formData.get('nome') as string,
@@ -287,7 +298,7 @@ export async function createHospedagem(formData: FormData) {
 }
 
 export async function updateHospedagem(id: string, formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: HospedagemFormData = {
     nome: formData.get('nome') as string,
@@ -312,7 +323,7 @@ export async function updateHospedagem(id: string, formData: FormData) {
 }
 
 export async function deleteHospedagem(id: string) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const { error } = await supabase
     .from('hospedagens')
@@ -329,7 +340,7 @@ export async function deleteHospedagem(id: string) {
 
 // CRUD Restaurantes
 export async function createRestaurante(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: RestauranteFormData = {
     nome: formData.get('nome') as string,
@@ -353,7 +364,7 @@ export async function createRestaurante(formData: FormData) {
 }
 
 export async function updateRestaurante(id: string, formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: RestauranteFormData = {
     nome: formData.get('nome') as string,
@@ -378,7 +389,7 @@ export async function updateRestaurante(id: string, formData: FormData) {
 }
 
 export async function deleteRestaurante(id: string) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const { error } = await supabase
     .from('restaurantes')
@@ -395,7 +406,7 @@ export async function deleteRestaurante(id: string) {
 
 // CRUD FAQs
 export async function createFAQ(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: FAQFormData = {
     pergunta: formData.get('pergunta') as string,
@@ -417,7 +428,7 @@ export async function createFAQ(formData: FormData) {
 }
 
 export async function updateFAQ(id: string, formData: FormData) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const data: FAQFormData = {
     pergunta: formData.get('pergunta') as string,
@@ -440,7 +451,7 @@ export async function updateFAQ(id: string, formData: FormData) {
 }
 
 export async function deleteFAQ(id: string) {
-  const supabase = await createClient()
+  const supabase = createSupabaseAdmin()
 
   const { error } = await supabase
     .from('faqs')
