@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase-server'
 import { createFAQ } from '../actions'
+import { requireAuth } from '@/lib/auth-guard'
 import Link from 'next/link'
 
 async function getNextOrder() {

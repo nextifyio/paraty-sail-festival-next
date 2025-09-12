@@ -1,8 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createSupabaseAdmin } from '@/lib/supabase';
+import { requireAuthForAction } from '@/lib/auth-guard';
 
 export async function POST(request: NextRequest) {
   try {
+    // ✅ Verificar autenticação primeiro
+    const authResult = await requireAuthForAction();
+    if (!authResult.isAuthenticated) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const formData = await request.formData();
     const file = formData.get('file') as File;
     const bucket = formData.get('bucket') as string;
@@ -67,6 +74,12 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    // ✅ Verificar autenticação primeiro
+    const authResult = await requireAuthForAction();
+    if (!authResult.isAuthenticated) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
     const bucket = searchParams.get('bucket');
     const path = searchParams.get('path');

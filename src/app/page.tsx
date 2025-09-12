@@ -39,7 +39,7 @@ export default function Home() {
         <ExpositoresSection />
         <HospedagensSection />
         {/* <RestaurantesSection /> */}
-        <PatrocinadoresSection />
+        {/* <PatrocinadoresSection /> */}
         <SejaPatrocinadorSection />
         <ComoChegarSection />
         <FAQSection />

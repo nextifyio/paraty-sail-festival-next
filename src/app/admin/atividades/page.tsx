@@ -2,7 +2,7 @@
 
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
-import { deleteAtividade } from '../actions'
+import { deleteAtividade } from './actions'
 import { Edit, Plus, Calendar, Clock, MapPin, User, Filter } from 'lucide-react'
 import { DeleteForm } from '@/components/admin/DeleteForm'
 import { useState, useEffect } from 'react'
