@@ -2,10 +2,43 @@
 
 import { motion } from 'framer-motion';
 import { Star, ExternalLink } from 'lucide-react';
-import { patrocinadores } from '@/constants/data';
+import { usePatrocinadores } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
 export default function PatrocinadoresSection() {
+  const { patrocinadores, loading, error } = usePatrocinadores();
+
+  if (loading) {
+    return (
+      <SectionWrapper 
+        id="patrocinadores"
+        title="Patrocinadores"
+        subtitle="Empresas que apoiam a náutica brasileira"
+        className="bg-white"
+      >
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+          <p className="text-gray-600 mt-4">Carregando patrocinadores...</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <SectionWrapper 
+        id="patrocinadores"
+        title="Patrocinadores"
+        subtitle="Empresas que apoiam a náutica brasileira"
+        className="bg-white"
+      >
+        <div className="text-center py-12 text-red-600">
+          <p>Erro ao carregar patrocinadores: {error}</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
   return (
     <SectionWrapper 
       id="patrocinadores"

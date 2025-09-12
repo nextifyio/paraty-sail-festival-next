@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { useNotifications } from '@/components/notifications/NotificationProvider'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
 export default function NewHospedagem() {
   const router = useRouter()
+  const { success, error: showError } = useNotifications()
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     nome: '',
@@ -30,11 +32,12 @@ export default function NewHospedagem() {
 
       if (error) throw error
 
+      success('Hospedagem criada!', 'A hospedagem foi adicionada com sucesso.');
       router.push('/admin/hospedagens')
       router.refresh()
     } catch (error) {
       console.error('Error creating hospedagem:', error)
-      alert('Erro ao criar hospedagem')
+      showError('Erro ao criar hospedagem', 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }
@@ -154,7 +157,7 @@ export default function NewHospedagem() {
                 className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
               />
               <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
-                Hospedagem ativa
+                Ativo (aparece no site público)
               </label>
             </div>
 

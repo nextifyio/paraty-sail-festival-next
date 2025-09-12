@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { createPatrocinador } from '../../actions';
+import { useNotifications } from '@/components/notifications/NotificationProvider';
 
 const newSponsorSchema = z.object({
   nome: z.string().min(1, 'Nome é obrigatório'),
@@ -18,6 +19,7 @@ const newSponsorSchema = z.object({
   contato_email: z.string().email('Email inválido').optional().or(z.literal('')),
   contato_telefone: z.string().optional(),
   observacoes: z.string().optional(),
+  ativo: z.boolean(),
 });
 
 type NewSponsorFormData = z.infer<typeof newSponsorSchema>;
@@ -33,6 +35,7 @@ const tiposPatrocinador = [
 export function NewSponsorForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const { success, error: showError } = useNotifications();
 
   const {
     register,
@@ -42,6 +45,7 @@ export function NewSponsorForm() {
     resolver: zodResolver(newSponsorSchema),
     defaultValues: {
       tipo: 'apoiador',
+      ativo: true,
     },
   });
 
@@ -60,14 +64,16 @@ export function NewSponsorForm() {
       formData.append('contato_email', data.contato_email || '');
       formData.append('contato_telefone', data.contato_telefone || '');
       formData.append('observacoes', data.observacoes || '');
+      formData.append('ativo', data.ativo.toString());
 
       await createPatrocinador(formData);
       
+      success('Patrocinador criado!', 'O patrocinador foi adicionado com sucesso.');
       router.push('/admin/patrocinadores');
       router.refresh();
     } catch (error) {
       console.error('Erro ao criar patrocinador:', error);
-      alert('Erro ao criar patrocinador');
+      showError('Erro ao criar patrocinador', 'Tente novamente mais tarde.');
     } finally {
       setIsSubmitting(false);
     }
@@ -228,6 +234,26 @@ export function NewSponsorForm() {
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Observações adicionais"
           />
+        </div>
+
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Status
+          </label>
+          <div className="flex items-center">
+            <input
+              {...register('ativo')}
+              type="checkbox"
+              id="ativo"
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            />
+            <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
+              Ativo (aparece no site público)
+            </label>
+          </div>
+          {errors.ativo && (
+            <p className="mt-1 text-sm text-red-600">{errors.ativo.message}</p>
+          )}
         </div>
       </div>
 

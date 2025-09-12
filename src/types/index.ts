@@ -6,6 +6,9 @@ export interface Pessoa {
   instagram: string;
   imagem?: string;
   tipo: 'palestrante' | 'atracao';
+  ativo?: boolean; // Optional for local data, required for database
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface AtividadeFestival {
@@ -18,6 +21,9 @@ export interface AtividadeFestival {
   detalhes: string;
   pessoaId?: string; // Referência para o objeto Pessoa
   local?: string;
+  ativo?: boolean; // Optional for local data, required for database
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Palestrante {
@@ -44,10 +50,14 @@ export interface DiaProgramacao {
 }
 
 export interface Patrocinador {
+  id: string;
   nome: string;
   logo: string;
   link: string;
   nivel: 'master' | 'ouro' | 'prata' | 'bronze';
+  ativo?: boolean; // Optional for local data, required for database
+  created_at?: string;
+  updated_at?: string;
 }
 
 // Tipos para dados constantes (sem campos de banco)
@@ -80,9 +90,9 @@ export interface Hospedagem {
   desconto?: string;
   contato: string;
   localizacao: string;
-  ativo: boolean;
-  created_at: string;
-  updated_at: string;
+  ativo?: boolean; // Optional for local data, required for database
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Restaurante {
@@ -92,17 +102,17 @@ export interface Restaurante {
   endereco: string;
   telefone: string;
   cardapio?: string;
-  ativo: boolean;
-  created_at: string;
-  updated_at: string;
+  ativo?: boolean; // Optional for local data, required for database
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface FAQ {
   id: string;
   pergunta: string;
   resposta: string;
-  ordem: number;
-  ativo: boolean;
-  created_at: string;
-  updated_at: string;
+  ordem?: number;
+  ativo?: boolean; // Optional for local data, required for database
+  created_at?: string;
+  updated_at?: string;
 }

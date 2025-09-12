@@ -2,10 +2,43 @@
 
 import { motion } from 'framer-motion';
 import { HelpCircle, ChevronDown, Mail } from 'lucide-react';
-import { faqItems } from '@/constants/data';
+import { useFaqs } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
 export default function FAQSection() {
+  const { faqs, loading, error } = useFaqs();
+
+  if (loading) {
+    return (
+      <SectionWrapper 
+        id="faq"
+        title="Perguntas Frequentes"
+        subtitle="Tire suas dúvidas sobre o evento"
+        className="bg-white"
+      >
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+          <p className="text-gray-600 mt-4">Carregando perguntas frequentes...</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <SectionWrapper 
+        id="faq"
+        title="Perguntas Frequentes"
+        subtitle="Tire suas dúvidas sobre o evento"
+        className="bg-white"
+      >
+        <div className="text-center py-12 text-red-600">
+          <p>Erro ao carregar perguntas frequentes: {error}</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
   return (
     <SectionWrapper 
       id="faq"
@@ -15,7 +48,7 @@ export default function FAQSection() {
     >
 
       <div className="max-w-4xl mx-auto space-y-6">
-        {faqItems.map((item, index) => (
+        {faqs.map((item, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 30 }}

@@ -22,7 +22,6 @@ async function getActivity(id: string) {
       )
     `)
     .eq('id', id)
-    .eq('ativo', true)
     .single();
 
   if (error || !activity) {
@@ -30,47 +29,23 @@ async function getActivity(id: string) {
     return null;
   }
 
-  // Mapear campos do banco para o que o formulário espera
-  const mappedActivity = {
+  return {
     id: activity.id,
-    nome: activity.titulo, // titulo -> nome
-    descricao: activity.detalhes, // detalhes -> descricao  
-    data_inicio: activity.data,
-    data_fim: activity.data, // usar a mesma data
-    hora_inicio: activity.horario?.split(' às ')[0] || activity.horario,
-    hora_fim: activity.horario?.split(' às ')[1] || '',
+    titulo: activity.titulo,
+    tipo: activity.tipo,
+    dia: activity.dia,
+    data: activity.data,
+    horario: activity.horario,
+    detalhes: activity.detalhes,
     local: activity.local,
-    tipo_atividade: mapTipoAtividade(activity.tipo),
     pessoa_id: activity.pessoa_id,
-    preco: 0, // campo não existe no banco atual
-    capacidade_maxima: 0, // campo não existe no banco atual
-    observacoes: '', // campo não existe no banco atual
+    ativo: activity.ativo,
     pessoa_festival: activity.pessoa_festival ? {
       id: activity.pessoa_festival.id,
       nome: activity.pessoa_festival.nome,
-      tipo_pessoa: activity.pessoa_festival.tipo
+      tipo: activity.pessoa_festival.tipo
     } : undefined
   };
-
-  return mappedActivity;
-}
-
-function mapTipoAtividade(tipo: string): 'palestra' | 'workshop' | 'competicao' | 'social' | 'cultural' {
-  const tipoMap: Record<string, 'palestra' | 'workshop' | 'competicao' | 'social' | 'cultural'> = {
-    'palestra': 'palestra',
-    'workshop': 'workshop', 
-    'regata': 'competicao',
-    'competicao': 'competicao',
-    'show': 'cultural',
-    'cultura': 'cultural',
-    'premiacao': 'social',
-    'abertura': 'social',
-    'encerramento': 'social',
-    'homenagem': 'social',
-    'kids': 'social'
-  };
-  
-  return tipoMap[tipo] || 'palestra';
 }
 
 async function getPessoas() {
@@ -87,11 +62,7 @@ async function getPessoas() {
     return [];
   }
 
-  // Mapear tipo para tipo_pessoa para compatibilidade
-  return (pessoas || []).map(pessoa => ({
-    ...pessoa,
-    tipo_pessoa: pessoa.tipo
-  }));
+  return pessoas || [];
 }
 
 export default async function EditActivityPage({ params }: PageProps) {

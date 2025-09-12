@@ -2,10 +2,43 @@
 
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Bed, Calendar } from 'lucide-react';
-import { hospedagens } from '@/constants/data';
+import { useHospedagens } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
 export default function HospedagensSection() {
+  const { hospedagens, loading, error } = useHospedagens();
+
+  if (loading) {
+    return (
+      <SectionWrapper 
+        id="hospedagem" 
+        title="Hospedagem" 
+        subtitle="Pousadas parceiras com descontos especiais"
+        className="bg-white"
+      >
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+          <p className="text-gray-600 mt-4">Carregando hospedagens...</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <SectionWrapper 
+        id="hospedagem" 
+        title="Hospedagem" 
+        subtitle="Pousadas parceiras com descontos especiais"
+        className="bg-white"
+      >
+        <div className="text-center py-12 text-red-600">
+          <p>Erro ao carregar hospedagens: {error}</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
   return (
     <SectionWrapper 
       id="hospedagem" 

@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase-server'
-import { createAtividade } from '../../actions'
+import { createAtividade } from '../actions'
 import Link from 'next/link'
 
 async function getPessoas() {
@@ -80,14 +80,14 @@ export default async function NewAtividadePage() {
 
             <div>
               <label htmlFor="pessoa_id" className="block text-sm font-medium text-gray-700">
-                Pessoa Responsável
+                Participante Responsável
               </label>
               <select
                 name="pessoa_id"
                 id="pessoa_id"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
               >
-                <option value="">Nenhuma pessoa específica</option>
+                <option value="">Nenhum participante específico</option>
                 {pessoas.map((pessoa) => (
                   <option key={pessoa.id} value={pessoa.id}>
                     {pessoa.nome} ({pessoa.tipo})
@@ -121,12 +121,11 @@ export default async function NewAtividadePage() {
                 Data *
               </label>
               <input
-                type="text"
+                type="date"
                 name="data"
                 id="data"
                 required
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-teal-500 focus:border-teal-500"
-                placeholder="Ex: 20/11/2025"
               />
             </div>
 

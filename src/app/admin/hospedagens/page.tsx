@@ -20,7 +20,6 @@ export default async function HospedagensPage() {
     const { data: hospedagens, error } = await supabase
     .from('hospedagens')
     .select('*')
-    .eq('ativo', true)
     .order('nome') as { data: Hospedagem[] | null, error: Error | null }
 
   if (error) {

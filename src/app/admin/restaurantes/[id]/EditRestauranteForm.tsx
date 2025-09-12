@@ -20,7 +20,8 @@ export default function EditRestauranteForm({ restaurante }: EditRestauranteForm
     especialidade: restaurante.especialidade,
     endereco: restaurante.endereco,
     telefone: restaurante.telefone,
-    cardapio: restaurante.cardapio || ''
+    cardapio: restaurante.cardapio || '',
+    ativo: restaurante.ativo ?? true
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,10 +50,10 @@ export default function EditRestauranteForm({ restaurante }: EditRestauranteForm
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+    const { name, value, type } = e.target
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     }))
   }
 
@@ -153,6 +154,20 @@ export default function EditRestauranteForm({ restaurante }: EditRestauranteForm
                 placeholder="https://www.restaurante.com.br/cardapio"
               />
             </div>
+          </div>
+
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              name="ativo"
+              id="ativo"
+              checked={formData.ativo}
+              onChange={handleChange}
+              className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
+            />
+            <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
+              Ativo (aparece no site público)
+            </label>
           </div>
 
           <div className="flex justify-end space-x-4">

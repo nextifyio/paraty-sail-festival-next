@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { useNotifications } from '@/components/notifications/NotificationProvider'
 import { Hospedagem } from '@/types'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -13,6 +14,7 @@ interface Props {
 
 export default function EditHospedagemForm({ hospedagem }: Props) {
   const router = useRouter()
+  const { success, error: showError } = useNotifications()
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     nome: hospedagem.nome,
@@ -35,11 +37,12 @@ export default function EditHospedagemForm({ hospedagem }: Props) {
 
       if (error) throw error
 
+      success('Hospedagem atualizada!', 'As informações foram salvas com sucesso.');
       router.push('/admin/hospedagens')
       router.refresh()
     } catch (error) {
       console.error('Error updating hospedagem:', error)
-      alert('Erro ao atualizar hospedagem')
+      showError('Erro ao atualizar hospedagem', 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }
@@ -65,11 +68,12 @@ export default function EditHospedagemForm({ hospedagem }: Props) {
 
       if (error) throw error
 
+      success('Hospedagem excluída!', 'A hospedagem foi removida com sucesso.');
       router.push('/admin/hospedagens')
       router.refresh()
     } catch (error) {
       console.error('Error deleting hospedagem:', error)
-      alert('Erro ao excluir hospedagem')
+      showError('Erro ao excluir hospedagem', 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }
@@ -190,7 +194,7 @@ export default function EditHospedagemForm({ hospedagem }: Props) {
                 className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
               />
               <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
-                Hospedagem ativa
+                Ativo (aparece no site público)
               </label>
             </div>
 

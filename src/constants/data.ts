@@ -632,10 +632,10 @@ export const atracoes: Palestrante[] = getAtracoes().map(pessoa => ({
 export const programacao: DiaProgramacao[] = getProgramacaoAgrupada();
 
 export const patrocinadores: Patrocinador[] = [
-  { nome: "Patrocinador Master", logo: "", link: "https://instagram.com", nivel: "master" },
-  { nome: "Patrocinador Ouro", logo: "", link: "https://instagram.com", nivel: "ouro" },
-  { nome: "Patrocinador Prata", logo: "", link: "https://instagram.com", nivel: "prata" },
-  { nome: "Patrocinador Bronze", logo: "", link: "https://instagram.com", nivel: "bronze" }
+  { id: "patrocinador-master", nome: "Patrocinador Master", logo: "", link: "https://instagram.com", nivel: "master" },
+  { id: "patrocinador-ouro", nome: "Patrocinador Ouro", logo: "", link: "https://instagram.com", nivel: "ouro" },
+  { id: "patrocinador-prata", nome: "Patrocinador Prata", logo: "", link: "https://instagram.com", nivel: "prata" },
+  { id: "patrocinador-bronze", nome: "Patrocinador Bronze", logo: "", link: "https://instagram.com", nivel: "bronze" }
 ];
 
 export const hospedagens: HospedagemData[] = [

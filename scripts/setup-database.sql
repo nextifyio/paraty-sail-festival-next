@@ -139,3 +139,4 @@ CREATE POLICY "Permitir todas operações para usuários autenticados - hospedag
 CREATE POLICY "Permitir todas operações para usuários autenticados - restaurantes" ON restaurantes FOR ALL USING (auth.role() = 'authenticated');
 CREATE POLICY "Permitir todas operações para usuários autenticados - faqs" ON faqs FOR ALL USING (auth.role() = 'authenticated');
 CREATE POLICY "Permitir todas operações para usuários autenticados - itens_genericos" ON itens_genericos FOR ALL USING (auth.role() = 'authenticated');
+CREATE POLICY "Permitir todas operações para usuários autenticados - itens_genericos" ON itens_genericos FOR ALL USING (auth.role() = 'authenticated');

@@ -30,6 +30,7 @@ interface PatrocinadorFormData {
   logo?: string
   link?: string
   nivel: 'master' | 'ouro' | 'prata' | 'bronze'
+  ativo?: boolean
 }
 
 interface HospedagemFormData {
@@ -150,7 +151,7 @@ export async function createAtividade(formData: FormData) {
   redirect('/admin/atividades')
 }
 
-export async function updateAtividade(id: string, formData: FormData) {
+export async function updateAtividadeOld(id: string, formData: FormData) {
   const supabase = await createClient()
 
   const data: AtividadeFormData = {
@@ -202,7 +203,8 @@ export async function createPatrocinador(formData: FormData) {
     nome: formData.get('nome') as string,
     logo: formData.get('logo') as string || undefined,
     link: formData.get('link') as string || undefined,
-    nivel: formData.get('nivel') as 'master' | 'ouro' | 'prata' | 'bronze'
+    nivel: formData.get('nivel') as 'master' | 'ouro' | 'prata' | 'bronze',
+    ativo: formData.get('ativo') === 'true'
   }
 
   const { error } = await supabase
@@ -225,7 +227,8 @@ export async function updatePatrocinador(id: string, formData: FormData) {
     nome: formData.get('nome') as string,
     logo: formData.get('logo') as string || undefined,
     link: formData.get('link') as string || undefined,
-    nivel: formData.get('nivel') as 'master' | 'ouro' | 'prata' | 'bronze'
+    nivel: formData.get('nivel') as 'master' | 'ouro' | 'prata' | 'bronze',
+    ativo: formData.get('ativo') === 'true'
   }
 
   const { error } = await supabase

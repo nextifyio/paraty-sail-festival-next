@@ -1,10 +1,43 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { programacao } from '@/constants/data';
+import { useProgramacao } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
 export default function ProgramacaoSection() {
+  const { programacao, loading, error } = useProgramacao();
+
+  if (loading) {
+    return (
+      <SectionWrapper 
+        id="programacao" 
+        title="Programação"
+        subtitle="Quatro dias de pura emoção e aprendizado"
+        className="bg-gradient-to-br from-teal-50 to-amber-50"
+      >
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+          <p className="text-gray-600 mt-4">Carregando programação...</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <SectionWrapper 
+        id="programacao" 
+        title="Programação"
+        subtitle="Quatro dias de pura emoção e aprendizado"
+        className="bg-gradient-to-br from-teal-50 to-amber-50"
+      >
+        <div className="text-center py-12 text-red-600">
+          <p>Erro ao carregar programação: {error}</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
   return (
     <SectionWrapper 
       id="programacao" 

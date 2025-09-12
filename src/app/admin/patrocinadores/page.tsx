@@ -11,7 +11,6 @@ async function getPatrocinadores() {
   const { data: patrocinadores, error } = await supabase
     .from('patrocinadores')
     .select('*')
-    .eq('ativo', true)
     .order('nome');
 
   if (error) {
@@ -95,8 +94,12 @@ export default async function PatrocinadoresPage() {
                         }`}>
                           {patrocinador.tipo?.charAt(0).toUpperCase() + patrocinador.tipo?.slice(1)}
                         </span>
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          Ativo
+                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                          patrocinador.ativo 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-red-100 text-red-800'
+                        }`}>
+                          {patrocinador.ativo ? 'Ativo' : 'Inativo'}
                         </span>
                         {patrocinador.valor_patrocinio && (
                           <span className="text-sm font-medium text-gray-700">

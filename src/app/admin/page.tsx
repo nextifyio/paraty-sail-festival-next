@@ -46,7 +46,7 @@ export default async function AdminDashboard() {
 
   const cards = [
     { 
-      title: 'Pessoas do Festival', 
+      title: 'Participantes', 
       count: stats.pessoas, 
       href: '/admin/pessoas', 
       icon: Users,

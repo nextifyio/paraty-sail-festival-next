@@ -2,11 +2,34 @@
 
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Star, UtensilsCrossed, ExternalLink } from 'lucide-react';
-import { restaurantes } from '@/constants/data';
+import { useRestaurantes } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 import Image from 'next/image';
 
 export default function RestaurantesSection() {
+  const { restaurantes, loading, error } = useRestaurantes();
+
+  if (loading) {
+    return (
+      <SectionWrapper id="restaurantes" title="Área Gastronômica" subtitle="Os melhores sabores do Brasil e experiência da culinária caiçara dentro do Paraty Sail Festival">
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+          <p className="text-gray-600 mt-4">Carregando restaurantes...</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <SectionWrapper id="restaurantes" title="Área Gastronômica" subtitle="Os melhores sabores do Brasil e experiência da culinária caiçara dentro do Paraty Sail Festival">
+        <div className="text-center py-12 text-red-600">
+          <p>Erro ao carregar restaurantes: {error}</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
   return (
     <SectionWrapper id="restaurantes" title="Área Gastronômica" subtitle="Os melhores sabores do Brasil e experiência da culinária caiçara dentro do Paraty Sail Festival">
       <div className="grid md:grid-cols-3 gap-8">

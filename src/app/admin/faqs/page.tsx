@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase-server'
 import { FAQ } from '@/types'
 import Link from 'next/link'
 import { Edit, Plus, ChevronUp, ChevronDown, HelpCircle, MessageCircle } from 'lucide-react'
-import { deleteFAQ } from '../actions'
+import { deleteFAQ } from './actions'
 import { DeleteForm } from '@/components/admin/DeleteForm'
 
 function DeleteButton({ id }: { id: string }) {

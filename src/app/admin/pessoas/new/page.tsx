@@ -17,7 +17,8 @@ export default function NewPessoaPage() {
     tipo: 'palestrante' as 'palestrante' | 'atracao',
     especialidade: '',
     bio: '',
-    instagram: ''
+    instagram: '',
+    ativo: true
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,29 +30,28 @@ export default function NewPessoaPage() {
         .from('pessoas_festival')
         .insert([{
           ...formData,
-          imagem: imageUrl,
-          ativo: true
+          imagem: imageUrl
         }])
         .select()
 
       if (error) throw error
 
-      success('Pessoa criada!', 'A pessoa foi adicionada com sucesso.')
+      success('Participante criado!', 'O participante foi adicionado com sucesso.')
       router.push('/admin/pessoas')
       router.refresh()
     } catch (error) {
       console.error('Error creating pessoa:', error)
-      showError('Erro ao criar pessoa', 'Tente novamente mais tarde.')
+      showError('Erro ao criar participante', 'Tente novamente mais tarde.')
     } finally {
       setLoading(false)
     }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
+    const { name, value, type } = e.target
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     }))
   }
 
@@ -65,7 +65,7 @@ export default function NewPessoaPage() {
           ← Voltar
         </Link>
         <h1 className="text-3xl font-bold text-gray-900">
-          Nova Pessoa
+          Novo Participante
         </h1>
       </div>
 
@@ -157,13 +157,32 @@ export default function NewPessoaPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Foto da Pessoa
+                Foto do Participante
               </label>
               <ImageUpload
                 bucket="pessoas"
                 currentImageUrl={imageUrl || undefined}
                 onImageChange={setImageUrl}
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Status
+              </label>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="ativo"
+                  id="ativo"
+                  checked={formData.ativo}
+                  onChange={handleChange}
+                  className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
+                />
+                <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
+                  Ativo (aparece no site público)
+                </label>
+              </div>
             </div>
           </div>
 
@@ -179,7 +198,7 @@ export default function NewPessoaPage() {
               disabled={loading}
               className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition-colors disabled:opacity-50"
             >
-              {loading ? 'Salvando...' : 'Salvar Pessoa'}
+              {loading ? 'Salvando...' : 'Salvar Participante'}
             </button>
           </div>
         </form>

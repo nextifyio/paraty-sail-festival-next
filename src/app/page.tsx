@@ -32,7 +32,6 @@ export default function Home() {
       <main className="flex-grow">
         <HeroSection onScrollToSection={scrollToSection} />
         <SobreSection />
-        {/* <SobreSection /> */}
         <ProgramacaoSection />
         <PalestrantesSection />
         <AtracoesSection />

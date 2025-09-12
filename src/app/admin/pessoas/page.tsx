@@ -12,7 +12,7 @@ async function getPessoas() {
   const { data: pessoas, error } = await supabase
     .from('pessoas_festival')
     .select('*')
-    .eq('ativo', true)
+    //.eq('ativo', true)
     .order('nome')
 
   if (error) {
@@ -31,7 +31,7 @@ export default async function PessoasPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
-            Pessoas do Festival
+            Participantes
           </h1>
           <p className="text-gray-600 mt-2">Gerencie palestrantes e atrações musicais</p>
         </div>
@@ -40,7 +40,7 @@ export default async function PessoasPage() {
           className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200 shadow-lg"
         >
           <Plus className="h-4 w-4 mr-2" />
-          Nova Pessoa
+          Novo Participante
         </Link>
       </div>
 
@@ -83,8 +83,12 @@ export default async function PessoasPage() {
                         }`}>
                           {pessoa.tipo === 'palestrante' ? 'Palestrante' : 'Atração Musical'}
                         </span>
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          Ativo
+                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                          pessoa.ativo 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-red-100 text-red-800'
+                        }`}>
+                          {pessoa.ativo ? 'Ativo' : 'Inativo'}
                         </span>
                       </div>
                     </div>

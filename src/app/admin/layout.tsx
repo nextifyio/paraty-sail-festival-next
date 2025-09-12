@@ -80,7 +80,7 @@ export default async function AdminLayout({
                     className="flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gradient-to-r hover:from-teal-50 hover:to-blue-50 hover:text-teal-700 transition-all duration-200 font-medium"
                   >
                     <span className="w-2 h-2 bg-teal-500 rounded-full mr-3"></span>
-                    Pessoas do Festival
+                    Participantes
                   </Link>
                 </li>
                 <li>

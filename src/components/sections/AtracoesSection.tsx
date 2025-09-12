@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Mic } from 'lucide-react';
 import Image from 'next/image';
-import { atracoes } from '@/constants/data';
+import { useAtracoes } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
 // Função para extrair username do Instagram da URL
@@ -19,6 +19,39 @@ const getLocalProfileImage = (atracao: { imagem?: string }) => {
 };
 
 export default function AtracoesSection() {
+  const { atracoes, loading, error } = useAtracoes();
+
+  if (loading) {
+    return (
+      <SectionWrapper 
+        id="atracoes"
+        title="Atrações"
+        subtitle="O melhor da cultura local em um só lugar."
+        className="bg-gradient-to-br from-teal-50 to-amber-50"
+      >
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
+          <p className="text-gray-600 mt-4">Carregando atrações...</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
+  if (error) {
+    return (
+      <SectionWrapper 
+        id="atracoes"
+        title="Atrações"
+        subtitle="O melhor da cultura local em um só lugar."
+        className="bg-gradient-to-br from-teal-50 to-amber-50"
+      >
+        <div className="text-center py-12 text-red-600">
+          <p>Erro ao carregar atrações: {error}</p>
+        </div>
+      </SectionWrapper>
+    );
+  }
+
   return (
     <SectionWrapper 
       id="atracoes"

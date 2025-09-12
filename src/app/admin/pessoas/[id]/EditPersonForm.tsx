@@ -16,6 +16,7 @@ const editPersonSchema = z.object({
   especialidade: z.string().min(1, 'Especialidade é obrigatória'),
   bio: z.string().min(1, 'Biografia é obrigatória'),
   instagram: z.string().url('Instagram deve ser uma URL válida').min(1, 'Instagram é obrigatório'),
+  ativo: z.boolean(),
 });
 
 type EditPersonFormData = z.infer<typeof editPersonSchema>;
@@ -29,6 +30,7 @@ interface EditPersonFormProps {
     bio: string;
     instagram: string;
     imagem?: string;
+    ativo?: boolean;
   };
 }
 
@@ -50,6 +52,7 @@ export function EditPersonForm({ pessoa }: EditPersonFormProps) {
       especialidade: pessoa.especialidade,
       bio: pessoa.bio,
       instagram: pessoa.instagram,
+      ativo: pessoa.ativo ?? true,
     },
   });
 
@@ -66,18 +69,19 @@ export function EditPersonForm({ pessoa }: EditPersonFormProps) {
           bio: data.bio,
           instagram: data.instagram,
           imagem: imageUrl,
+          ativo: data.ativo,
           updated_at: new Date().toISOString()
         })
         .eq('id', pessoa.id);
 
       if (error) throw error;
 
-      success('Pessoa atualizada!', 'As informações foram salvas com sucesso.');
+      success('Participante atualizado!', 'As informações foram salvas com sucesso.');
       router.push('/admin/pessoas');
       router.refresh();
     } catch (error) {
       console.error('Erro ao atualizar pessoa:', error);
-      showError('Erro ao atualizar pessoa', 'Tente novamente mais tarde.');
+      showError('Erro ao atualizar participante', 'Tente novamente mais tarde.');
     } finally {
       setIsSubmitting(false);
     }
@@ -93,7 +97,7 @@ export function EditPersonForm({ pessoa }: EditPersonFormProps) {
           ← Voltar
         </Link>
         <h1 className="text-3xl font-bold text-gray-900">
-          Editar Pessoa
+          Editar Participante
         </h1>
       </div>
 
@@ -185,13 +189,33 @@ export function EditPersonForm({ pessoa }: EditPersonFormProps) {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Foto da Pessoa
+                Foto do Participante
               </label>
               <ImageUpload
                 bucket="pessoas"
                 currentImageUrl={imageUrl || undefined}
                 onImageChange={setImageUrl}
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Status
+              </label>
+              <div className="flex items-center">
+                <input
+                  {...register('ativo')}
+                  type="checkbox"
+                  id="ativo"
+                  className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded"
+                />
+                <label htmlFor="ativo" className="ml-2 block text-sm text-gray-900">
+                  Ativo (aparece no site público)
+                </label>
+              </div>
+              {errors.ativo && (
+                <p className="mt-1 text-sm text-red-600">{errors.ativo.message}</p>
+              )}
             </div>
           </div>
 
