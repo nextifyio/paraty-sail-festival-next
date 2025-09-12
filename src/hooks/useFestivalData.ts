@@ -16,13 +16,10 @@ import {
 import { 
   pessoasFestival,
   atividadesFestival,
-  programacao,
   patrocinadores as patrocinadoresLocal,
   hospedagens as hospedagensLocal,
   restaurantes as restaurantesLocal,
-  faqItems as faqsLocal,
-  palestrantes,
-  atracoes
+  faqItems as faqsLocal
 } from '@/constants/data'
 
 // Flag para controlar origem dos dados
@@ -46,7 +43,7 @@ export function useFestivalData() {
     } else {
       loadFromLocal()
     }
-  }, [])
+  }, [USE_SUPABASE])
 
   const loadFromSupabase = async () => {
     try {
@@ -134,7 +131,7 @@ export function useFestivalData() {
       setError(null)
 
       // Usar pessoas do arquivo local (palestrantes + atrações) e adicionar campos obrigatórios
-      const pessoasComAtivo = pessoasFestival.map((pessoa: any) => ({
+      const pessoasComAtivo = pessoasFestival.map((pessoa: Pessoa) => ({
         ...pessoa,
         ativo: pessoa.ativo !== undefined ? pessoa.ativo : true,
         created_at: pessoa.created_at || new Date().toISOString(),
@@ -142,7 +139,7 @@ export function useFestivalData() {
       }))
 
       // Usar atividades do arquivo local e adicionar campos obrigatórios
-      const atividadesComAtivo = atividadesFestival.map((atividade: any) => ({
+      const atividadesComAtivo = atividadesFestival.map((atividade: AtividadeFestival) => ({
         ...atividade,
         ativo: atividade.ativo !== undefined ? atividade.ativo : true,
         created_at: atividade.created_at || new Date().toISOString(),
@@ -150,7 +147,7 @@ export function useFestivalData() {
       }))
 
       // Usar patrocinadores do arquivo local e adicionar campos obrigatórios
-      const patrocinadoresComAtivo = patrocinadoresLocal.map((patrocinador: any) => ({
+      const patrocinadoresComAtivo = patrocinadoresLocal.map((patrocinador: Patrocinador) => ({
         ...patrocinador,
         ativo: patrocinador.ativo !== undefined ? patrocinador.ativo : true,
         created_at: patrocinador.created_at || new Date().toISOString(),
@@ -158,31 +155,31 @@ export function useFestivalData() {
       }))
 
       // Usar hospedagens do arquivo local e adicionar campos obrigatórios
-      const hospedagensComAtivo = hospedagensLocal.map((item: any, index: number) => ({
-        id: item.id || `hospedagem-${index}`,
+      const hospedagensComAtivo = hospedagensLocal.map((item, index: number) => ({
         ...item,
-        ativo: item.ativo !== undefined ? item.ativo : true,
-        created_at: item.created_at || new Date().toISOString(),
-        updated_at: item.updated_at || new Date().toISOString()
+        id: `hospedagem-${index}`,
+        ativo: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       }))
 
       // Usar restaurantes do arquivo local e adicionar campos obrigatórios
-      const restaurantesComAtivo = restaurantesLocal.map((item: any, index: number) => ({
-        id: item.id || `restaurante-${index}`,
+      const restaurantesComAtivo = restaurantesLocal.map((item, index: number) => ({
         ...item,
-        ativo: item.ativo !== undefined ? item.ativo : true,
-        created_at: item.created_at || new Date().toISOString(),
-        updated_at: item.updated_at || new Date().toISOString()
+        id: `restaurante-${index}`,
+        ativo: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       }))
 
       // Usar FAQs do arquivo local e adicionar campos obrigatórios
-      const faqsComAtivo = faqsLocal.map((item: any, index: number) => ({
-        id: item.id || `faq-${index}`,
+      const faqsComAtivo = faqsLocal.map((item, index: number) => ({
         ...item,
-        ordem: item.ordem || index + 1,
-        ativo: item.ativo !== undefined ? item.ativo : true,
-        created_at: item.created_at || new Date().toISOString(),
-        updated_at: item.updated_at || new Date().toISOString()
+        id: `faq-${index}`,
+        ordem: index + 1,
+        ativo: true,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       }))
 
       setPessoas(pessoasComAtivo)
