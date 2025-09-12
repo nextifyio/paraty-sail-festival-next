@@ -4,6 +4,32 @@ import { motion } from 'framer-motion';
 import { useProgramacao } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
+// Função para formatar data para dd/mm/aaaa
+const formatarData = (data: string): string => {
+  if (!data) return '';
+  
+  // Se a data já estiver no formato dd/mm/aaaa, retorna como está
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
+    return data;
+  }
+  
+  // Se estiver no formato ISO (aaaa-mm-dd) ou outro formato
+  try {
+    const dateObj = new Date(data);
+    if (isNaN(dateObj.getTime())) {
+      return data; // Retorna a data original se não conseguir parsear
+    }
+    
+    const dia = dateObj.getDate().toString().padStart(2, '0');
+    const mes = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const ano = dateObj.getFullYear();
+    
+    return `${dia}/${mes}/${ano}`;
+  } catch (error) {
+    return data; // Retorna a data original em caso de erro
+  }
+};
+
 export default function ProgramacaoSection() {
   const { programacao, loading, error } = useProgramacao();
 
@@ -57,7 +83,7 @@ export default function ProgramacaoSection() {
           >
             <div className="bg-gradient-to-r from-teal-600 to-amber-600 text-white p-6">
               <h3 className="text-2xl font-bold">{dia.dia}</h3>
-              <p className="text-teal-100">{dia.data}</p>
+              <p className="text-teal-100">{formatarData(dia.data)}</p>
             </div>
             <div className="p-6">
               <div className="space-y-4">
@@ -68,6 +94,9 @@ export default function ProgramacaoSection() {
                     </div>
                     <div className="flex-1">
                       <p className="font-medium text-gray-800">{evento.evento}</p>
+                      {evento.pessoa && (
+                        <p className="text-sm text-gray-600 mt-1">com {evento.pessoa}</p>
+                      )}
                     </div>
                     <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                       evento.tipo === 'regata' ? 'bg-blue-100 text-blue-600' :

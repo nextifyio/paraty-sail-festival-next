@@ -26,6 +26,14 @@ export interface AtividadeFestival {
   updated_at?: string;
 }
 
+// Interface para atividades com dados da pessoa relacionada (do Supabase)
+export interface AtividadeFestivalComPessoa extends AtividadeFestival {
+  pessoa?: {
+    nome: string;
+    tipo: 'palestrante' | 'atracao';
+  } | null;
+}
+
 export interface Palestrante {
   nome: string;
   especialidade: string;
@@ -41,6 +49,7 @@ export interface Evento {
   evento: string;
   tipo: string;
   detalhes: string;
+  pessoa?: string; // Nome da pessoa responsável pela atividade
 }
 
 export interface DiaProgramacao {

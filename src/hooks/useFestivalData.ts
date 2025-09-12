@@ -7,7 +7,8 @@ import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import { 
   Pessoa, 
-  AtividadeFestival, 
+  AtividadeFestival,
+  AtividadeFestivalComPessoa,
   Patrocinador, 
   Hospedagem, 
   Restaurante, 
@@ -31,7 +32,7 @@ export function useFestivalData() {
 
   // Estados para cada tipo de dado
   const [pessoas, setPessoas] = useState<Pessoa[]>([])
-  const [atividades, setAtividades] = useState<AtividadeFestival[]>([])
+  const [atividades, setAtividades] = useState<AtividadeFestivalComPessoa[]>([])
   const [patrocinadores, setPatrocinadores] = useState<Patrocinador[]>([])
   const [hospedagens, setHospedagens] = useState<Hospedagem[]>([])
   const [restaurantes, setRestaurantes] = useState<Restaurante[]>([])
@@ -143,8 +144,13 @@ export function useFestivalData() {
         ...atividade,
         ativo: atividade.ativo !== undefined ? atividade.ativo : true,
         created_at: atividade.created_at || new Date().toISOString(),
-        updated_at: atividade.updated_at || new Date().toISOString()
-      }))
+        updated_at: atividade.updated_at || new Date().toISOString(),
+        // Adicionar dados da pessoa se pessoaId existir
+        pessoa: atividade.pessoaId ? (() => {
+          const pessoa = pessoasComAtivo.find(p => p.id === atividade.pessoaId)
+          return pessoa ? { nome: pessoa.nome, tipo: pessoa.tipo } : null
+        })() : null
+      })) as AtividadeFestivalComPessoa[]
 
       // Usar patrocinadores do arquivo local e adicionar campos obrigatórios
       const patrocinadoresComAtivo = patrocinadoresLocal.map((patrocinador: Patrocinador) => ({
@@ -307,7 +313,8 @@ export function useProgramacao() {
         horario: atividade.horario,
         evento: atividade.titulo,
         tipo: atividade.tipo,
-        detalhes: atividade.detalhes
+        detalhes: atividade.detalhes,
+        pessoa: atividade.pessoa?.nome || ''
       }))
       
       return {
