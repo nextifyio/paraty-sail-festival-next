@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import ConditionalAnalytics from '@/components/analytics/ConditionalAnalytics';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,6 +30,7 @@ export default function RootLayout({
         <script src="//tag.goadopt.io/injector.js?website_code=0b1384a7-c15c-42fe-af67-c0130b4c0568" className="adopt-injector"></script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <ConditionalAnalytics />
         <main className="min-h-screen bg-gradient-to-br from-slate-50 to-amber-50">
           {children}
         </main>
