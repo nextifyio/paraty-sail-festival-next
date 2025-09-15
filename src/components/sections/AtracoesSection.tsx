@@ -161,8 +161,17 @@ export default function AtracoesSection() {
               })()}
             </div>
             <div className="flex justify-between items-center text-sm mt-auto">
-              <span className="bg-teal-100 text-teal-600 px-3 py-1 rounded-full">{atracao.dia}</span>
-              <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full">{atracao.horario}</span>
+              {atracao.diasHorarios && atracao.diasHorarios.length > 0 ? (
+                <div className="flex flex-col md:flex-row gap-2">
+                  {atracao.diasHorarios.map((dh, i) => (
+                    <span key={i} className="bg-teal-100 text-teal-600 px-3 py-1 rounded-full">
+                      {dh.dia} <span className="bg-amber-100 text-amber-600 px-2 py-1 rounded-full ml-2">{dh.horario}</span>
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <span className="bg-gray-100 text-gray-400 px-3 py-1 rounded-full">Sem programação</span>
+              )}
             </div>
           </motion.div>
         ))}

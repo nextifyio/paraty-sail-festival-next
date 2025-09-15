@@ -256,20 +256,24 @@ export function usePalestrantes() {
   const palestrantes = pessoas
     .filter(pessoa => pessoa.tipo === 'palestrante')
     .map(pessoa => {
-      // Encontrar a primeira atividade desta pessoa
-      const primeiraAtividade = atividades.find(atividade => atividade.pessoaId === pessoa.id)
-      
+      // Buscar todas as atividades deste palestrante (por id ou nome)
+      const atividadesDoPalestrante = atividades.filter(
+        atividade => atividade.pessoaId === pessoa.id || atividade.pessoa?.nome === pessoa.nome
+      )
+
+      // Extrair todos os dias/horários únicos
+      const diasHorarios = atividadesDoPalestrante.map(a => ({ dia: a.dia, horario: a.horario })).filter(a => a.dia && a.horario)
+
       return {
         nome: pessoa.nome,
         especialidade: pessoa.especialidade,
         bio: pessoa.bio,
         instagram: pessoa.instagram,
-        dia: primeiraAtividade?.dia || "",
-        horario: primeiraAtividade?.horario || "",
+        diasHorarios,
         imagem: pessoa.imagem
       }
     })
-  
+
   return { palestrantes, loading, error }
 }
 
@@ -280,20 +284,24 @@ export function useAtracoes() {
   const atracoes = pessoas
     .filter(pessoa => pessoa.tipo === 'atracao')
     .map(pessoa => {
-      // Encontrar a primeira atividade desta pessoa
-      const primeiraAtividade = atividades.find(atividade => atividade.pessoaId === pessoa.id)
-      
+      // Buscar todas as atividades desta atração (por id ou nome)
+      const atividadesDaAtracao = atividades.filter(
+        atividade => atividade.pessoaId === pessoa.id || atividade.pessoa?.nome === pessoa.nome
+      )
+
+      // Extrair todos os dias/horários únicos
+      const diasHorarios = atividadesDaAtracao.map(a => ({ dia: a.dia, horario: a.horario })).filter(a => a.dia && a.horario)
+
       return {
         nome: pessoa.nome,
         especialidade: pessoa.especialidade,
         bio: pessoa.bio,
         instagram: pessoa.instagram,
-        dia: primeiraAtividade?.dia || "",
-        horario: primeiraAtividade?.horario || "",
+        diasHorarios,
         imagem: pessoa.imagem
       }
     })
-  
+
   return { atracoes, loading, error }
 }
 
