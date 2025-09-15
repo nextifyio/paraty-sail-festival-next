@@ -8,6 +8,16 @@ export default function ConditionalAnalytics() {
   const isAdminRoute = pathname?.startsWith('/admin')
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
+  // Debug em desenvolvimento
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🔍 Analytics Debug:', {
+      pathname,
+      isAdminRoute,
+      measurementId,
+      shouldLoad: !isAdminRoute && measurementId && measurementId !== 'G-XXXXXXXXXX'
+    })
+  }
+
   // Não carrega analytics em rotas admin ou se não há ID configurado
   if (isAdminRoute || !measurementId || measurementId === 'G-XXXXXXXXXX') {
     return null

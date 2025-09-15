@@ -1,0 +1,10 @@
+{
+  "env": {
+    "NEXT_PUBLIC_GA_MEASUREMENT_ID": "G-4D8NTGPGSB"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_GA_MEASUREMENT_ID": "G-4D8NTGPGSB"
+    }
+  }
+}

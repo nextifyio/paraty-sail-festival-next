@@ -4,6 +4,48 @@ import { motion } from 'framer-motion';
 import { useProgramacao } from '@/hooks/useFestivalData';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 
+// Função para obter o dia da semana em português a partir de uma data
+const obterDiaDaSemana = (data: string): string => {
+  if (!data) return '';
+  
+  try {
+    let dateObj: Date;
+    
+    // Se estiver no formato ISO (aaaa-mm-dd)
+    if (/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+      const [ano, mes, dia] = data.split('-');
+      dateObj = new Date(parseInt(ano), parseInt(mes) - 1, parseInt(dia));
+    }
+    // Se estiver no formato dd/mm/aaaa
+    else if (/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
+      const [dia, mes, ano] = data.split('/');
+      dateObj = new Date(parseInt(ano), parseInt(mes) - 1, parseInt(dia));
+    }
+    // Para outros formatos
+    else {
+      dateObj = new Date(data + 'T12:00:00');
+    }
+    
+    if (isNaN(dateObj.getTime())) {
+      return 'Data inválida';
+    }
+    
+    const diasDaSemana = [
+      'Domingo',
+      'Segunda-feira', 
+      'Terça-feira',
+      'Quarta-feira',
+      'Quinta-feira',
+      'Sexta-feira',
+      'Sábado'
+    ];
+    
+    return diasDaSemana[dateObj.getDay()];
+  } catch (error) {
+    return 'Data inválida';
+  }
+};
+
 // Função para formatar data para dd/mm/aaaa
 const formatarData = (data: string): string => {
   if (!data) return '';
@@ -13,16 +55,22 @@ const formatarData = (data: string): string => {
     return data;
   }
   
-  // Se estiver no formato ISO (aaaa-mm-dd) ou outro formato
+  // Se estiver no formato ISO (aaaa-mm-dd)
+  if (/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+    const [ano, mes, dia] = data.split('-');
+    return `${dia}/${mes}/${ano}`;
+  }
+  
+  // Para outros formatos, tenta usar Date mas com UTC para evitar problemas de timezone
   try {
-    const dateObj = new Date(data);
+    const dateObj = new Date(data + 'T12:00:00Z'); // Adiciona horário meio-dia UTC
     if (isNaN(dateObj.getTime())) {
       return data; // Retorna a data original se não conseguir parsear
     }
     
-    const dia = dateObj.getDate().toString().padStart(2, '0');
-    const mes = (dateObj.getMonth() + 1).toString().padStart(2, '0');
-    const ano = dateObj.getFullYear();
+    const dia = dateObj.getUTCDate().toString().padStart(2, '0');
+    const mes = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0');
+    const ano = dateObj.getUTCFullYear();
     
     return `${dia}/${mes}/${ano}`;
   } catch (error) {
@@ -82,7 +130,7 @@ export default function ProgramacaoSection() {
             className="bg-white rounded-2xl shadow-lg overflow-hidden"
           >
             <div className="bg-gradient-to-r from-teal-600 to-amber-600 text-white p-6">
-              <h3 className="text-2xl font-bold">{dia.dia}</h3>
+              <h3 className="text-2xl font-bold">{obterDiaDaSemana(dia.data)}</h3>
               <p className="text-teal-100">{formatarData(dia.data)}</p>
             </div>
             <div className="p-6">
