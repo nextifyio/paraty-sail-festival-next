@@ -5,7 +5,7 @@ Disallow: /auth/
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://paratysailfestival.com.br/sitemap.xml
+Sitemap: https://paratysailfestival.com/sitemap.xml
 
 # Crawl-delay (optional)
 Crawl-delay: 1
