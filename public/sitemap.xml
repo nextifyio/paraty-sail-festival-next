@@ -4,7 +4,14 @@
   <!-- Página Principal -->
   <url>
     <loc>https://paratysailfestival.com/</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,70 +19,140 @@
   <!-- Seções da página principal (âncoras) -->
   <url>
     <loc>https://paratysailfestival.com/#sobre</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#sobre</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#programacao</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#programacao</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#palestrantes</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#palestrantes</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#atracoes</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#atracoes</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#inscricoes</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#inscricoes</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#parceiros</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#parceiros</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#hospedagens</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#hospedagens</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#patrocinio</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#patrocinio</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#como-chegar</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#como-chegar</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://paratysailfestival.com/#faq</loc>
-    <lastmod>2025-09-16</lastmod>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.paratysailfestival.com/#faq</loc>
+    <lastmod>2025-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

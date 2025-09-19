@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model PessoaFestival {
@@ -130,6 +131,51 @@ enum TipoAtividade {
   encerramento
   homenagem
   kids
+}
+
+model InscricaoRegata {
+  id               String @id @default(uuid())
+  nome_capitao     String
+  email            String
+  telefone         String
+  classe_barco     ClasseBarco
+  nome_barco       String
+  tamanho_barco    String
+  num_tripulantes  Int
+  experiencia      ExperienciaVela
+  ja_participou    Boolean
+  edicoes_anteriores String?
+  expectativas     String?
+  como_conheceu    String?
+  aceita_contato   Boolean @default(true)
+  status           StatusInscricao @default(pendente)
+  observacoes      String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  
+  @@map("inscricoes_regata")
+}
+
+enum ClasseBarco {
+  cruceiro
+  esportivo
+  catamara
+  optimist
+  outro
+}
+
+enum ExperienciaVela {
+  iniciante
+  intermediario
+  avancado
+  expert
+}
+
+enum StatusInscricao {
+  pendente
+  aprovada
+  rejeitada
+  cancelada
 }
 
 enum NivelPatrocinio {

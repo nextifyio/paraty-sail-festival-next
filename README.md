@@ -2,6 +2,8 @@
 
 Sistema completo de gerenciamento para o Paraty Sail Festival, construído com Next.js 15, Supabase e TypeScript.
 
+> 📚 **Documentação Completa**: Veja a pasta `/docs` para contexto técnico, decisões de projeto e troubleshooting detalhado.
+
 ## 🚀 Tecnologias
 
 - **Next.js 15** - App Router, Server Components, Server Actions
@@ -61,7 +63,7 @@ npm install
 3. Vá para Settings > API e copie as chaves
 4. Configure o banco seguindo o passo 5
 
-### 4. Configuração das Variáveis de Ambiente
+### 3. Configuração das Variáveis de Ambiente
 
 Crie um arquivo `.env.local` na raiz do projeto:
 
@@ -74,7 +76,24 @@ SUPABASE_SERVICE_ROLE_KEY=sua_service_role_key
 # Database (Supabase Cloud)
 DATABASE_URL="postgresql://postgres:[SUA_SENHA]@db.[SEU_PROJETO].supabase.co:5432/postgres"
 DIRECT_URL="postgresql://postgres:[SUA_SENHA]@db.[SEU_PROJETO].supabase.co:5432/postgres"
+
+# Google Analytics (opcional)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+
+# Admin credentials (para setup inicial)
+ADMIN_EMAIL=admin@paratysailfestival.com
+ADMIN_PASSWORD=sua_senha_segura
 ```
+
+### 4. Google Analytics (Opcional)
+
+Para configurar o Google Analytics:
+
+1. Acesse [Google Analytics](https://analytics.google.com)
+2. Crie uma nova propriedade
+3. Configure para aplicação web
+4. Copie o Measurement ID (formato: G-XXXXXXXXXX)
+5. Adicione na variável `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 
 ### 5. Configuração do Banco de Dados (Cloud)
 
@@ -184,10 +203,69 @@ prisma/
 └── schema.prisma            # Schema do banco
 
 scripts/
-├── setup-database.sql       # DDL e configurações RLS
-├── migrate-data.ts          # Script de migração
-└── package-scripts.json     # Scripts auxiliares
+├── create-admin-user.sql    # SQL para criar usuário admin
+├── run-migrations.sh        # Script automatizado de migrations
+└── verificar-sistema-completo.js # Verificação do sistema
 ```
+
+## 🗄️ Database Migrations
+
+### Sistema de Migrations Automático
+
+Este projeto usa **Supabase Migrations** para controle de versão do banco de dados. As migrations são aplicadas automaticamente no Supabase Cloud.
+
+#### 📋 Comandos Essenciais
+
+```bash
+# Setup completo de migrations (recomendado)
+./scripts/run-migrations.sh
+
+# Ou manualmente:
+npx supabase login
+echo "aQKUqP9Jyr37z87n" | npx supabase link --project-ref gotwnlmvdjmexxfhbclr
+npx supabase migration up --linked
+npm run prisma:generate
+```
+
+#### 🆕 Criando Nova Migration
+
+```bash
+# Criar nova migration
+npx supabase migration new nome_da_migration
+
+# Editar arquivo SQL criado em: supabase/migrations/
+# Aplicar migration
+npx supabase migration up --linked
+
+# Atualizar cliente Prisma
+npm run prisma:generate
+```
+
+#### ✅ Verificar Sistema
+
+```bash
+# Testar se tudo está funcionando
+node scripts/verificar-sistema-completo.js
+```
+
+#### 📁 Estrutura de Migrations
+
+```
+supabase/
+└── migrations/
+    ├── 20250117000000_initial_schema.sql     # Schema inicial
+    ├── 20250117100000_storage_setup.sql     # Setup de storage  
+    ├── 20250911173359_remote_schema.sql     # Schema remoto
+    └── 20250916000005_create_inscricoes.sql # Inscrições da regata
+```
+
+#### 🔧 Credenciais de Conexão
+
+- **Project Ref**: `gotwnlmvdjmexxfhbclr`
+- **Senha DB**: `aQKUqP9Jyr37z87n`
+- **URL**: `https://gotwnlmvdjmexxfhbclr.supabase.co`
+
+> 📖 **Documentação Completa**: Veja `MIGRATIONS-GUIDE.md` para detalhes técnicos completos.
 
 ## 🗄️ Schema do Banco
 
@@ -259,17 +337,33 @@ npm run setup           # Setup completo (recomendado)
 2. Importe o projeto do GitHub
 3. Configure as variáveis de ambiente
 
-### 2. Variáveis de Ambiente
+### 2. Variáveis de Ambiente no Vercel
 
-Adicione as seguintes variáveis no painel do Vercel:
+No painel do Vercel, vá para Settings > Environment Variables e adicione:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=sua_url_do_supabase
+# Supabase (obrigatório)
+NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave_anonima
 SUPABASE_SERVICE_ROLE_KEY=sua_service_role_key
-DATABASE_URL=sua_database_url
-DIRECT_URL=sua_direct_url
+
+# Database (obrigatório)
+DATABASE_URL=postgresql://postgres:[SUA_SENHA]@db.[SEU_PROJETO].supabase.co:5432/postgres
+DIRECT_URL=postgresql://postgres:[SUA_SENHA]@db.[SEU_PROJETO].supabase.co:5432/postgres
+
+# Google Analytics (opcional)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+
+# Admin (recomendado)
+ADMIN_EMAIL=admin@paratysailfestival.com
+ADMIN_PASSWORD=sua_senha_segura
 ```
+
+**Onde encontrar as credenciais do Supabase:**
+- **NEXT_PUBLIC_SUPABASE_URL**: Settings > API > Project URL
+- **NEXT_PUBLIC_SUPABASE_ANON_KEY**: Settings > API > Project API keys > anon public
+- **SUPABASE_SERVICE_ROLE_KEY**: Settings > API > Project API keys > service_role (secret)
+- **DATABASE_URL**: Settings > Database > Connection string > URI
 
 ### 3. Deploy
 

@@ -94,6 +94,15 @@ export default async function AdminLayout({
                 </li>
                 <li>
                   <Link
+                    href="/admin/inscricoes"
+                    className="flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gradient-to-r hover:from-teal-50 hover:to-blue-50 hover:text-teal-700 transition-all duration-200 font-medium"
+                  >
+                    <span className="w-2 h-2 bg-amber-500 rounded-full mr-3"></span>
+                    Inscrições Regata
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/admin/patrocinadores"
                     className="flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gradient-to-r hover:from-teal-50 hover:to-blue-50 hover:text-teal-700 transition-all duration-200 font-medium"
                   >
