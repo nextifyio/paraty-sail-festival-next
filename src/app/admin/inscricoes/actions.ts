@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase-server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { InscricaoForm, CategoriaRegata } from '@/types'
+import { CategoriaRegata } from '@/types'
 import { EmailService } from '@/lib/email-service'
 
 export async function createInscricao(formData: FormData) {
@@ -37,7 +37,7 @@ export async function createInscricao(formData: FormData) {
     const fileExt = comprovante_pix.name.split('.').pop()
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
     
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('comprovantes')
       .upload(fileName, comprovante_pix)
 
@@ -130,7 +130,7 @@ export async function updateInscricao(id: string, formData: FormData) {
     throw new Error('Erro ao buscar inscrição')
   }
 
-  const updateData: any = {
+  const updateData: Record<string, unknown> = {
     updated_at: new Date().toISOString()
   }
 

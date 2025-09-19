@@ -44,6 +44,17 @@
 
 ## 🔧 Padrões de Implementação
 
+### ESLint e Qualidade de Código
+**Regras aplicadas**:
+- No unused variables (`@typescript-eslint/no-unused-vars`)
+- No explicit any (`@typescript-eslint/no-explicit-any`)
+- Next.js core web vitals
+
+**Padrões de tipagem**:
+- Usar `Record<string, unknown>` em vez de `any`
+- Remover imports não utilizados
+- Remover variáveis não utilizadas
+
 ### Estrutura de Páginas Admin
 ```
 admin/entity/
